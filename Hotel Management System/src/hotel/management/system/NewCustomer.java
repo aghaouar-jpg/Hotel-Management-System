@@ -53,7 +53,7 @@ public class NewCustomer extends JFrame {
                 ImageIcon i2 = new ImageIcon(i3);
                 JLabel l1 = new JLabel(i2);
                 l1.setBounds(480,10,300,500);
-                add(l1);
+                add(l1); 
 		
 		JLabel lblName = new JLabel("NEW CUSTOMER FORM");
 		lblName.setFont(new Font("Yu Mincho", Font.PLAIN, 20));

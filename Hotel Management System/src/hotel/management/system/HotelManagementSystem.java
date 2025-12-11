@@ -6,8 +6,8 @@
 package hotel.management.system;
 
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class HotelManagementSystem extends JFrame implements ActionListener{
 
