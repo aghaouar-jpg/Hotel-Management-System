@@ -2,27 +2,24 @@ name: Java CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Compile Java project
-        run: javac -d out $(find . -name "*.java")
-
-      - name: Run simple test
-        run: echo "Java project compiled successfully!"
+        run: |
+          mkdir -p out
+          javac -cp "HotelManagementSystem/lib/rs2xml.jar" -d out $(find HotelManagementSystem/src -name "*.java")
