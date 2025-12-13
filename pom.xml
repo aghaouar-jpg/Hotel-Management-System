@@ -9,12 +9,14 @@
     <groupId>unisa</groupId>
     <artifactId>hotel-management-system</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.2</junit.version>
+        <jacoco.version>0.8.11</jacoco.version>
+        <pitest.version>1.15.2</pitest.version>
+        <jmh.version>1.37</jmh.version>
     </properties>
 
     <dependencies>
@@ -23,18 +25,18 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.10.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- MySQL Connector -->
+        <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.4.0</version>
         </dependency>
 
-        <!-- rs2xml (DbUtils) - local JAR -->
+        <!-- rs2xml (LOCAL JAR) -->
         <dependency>
             <groupId>net.proteanit</groupId>
             <artifactId>rs2xml</artifactId>
@@ -43,6 +45,20 @@
             <systemPath>
                 ${project.basedir}/HotelManagementSystem/lib/rs2xml.jar
             </systemPath>
+        </dependency>
+
+        <!-- JMH -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
@@ -55,28 +71,34 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                </configuration>
             </plugin>
 
-            <!-- JUnit 5 runner -->
+            <!-- JUnit -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
-                <configuration>
-                    <useModulePath>false</useModulePath>
-                </configuration>
             </plugin>
 
-            <!-- PITEST (Mutation Testing) -->
+            <!-- JaCoCo -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- PiTest -->
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.15.2</version>
-
+                <version>${pitest.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.pitest</groupId>
@@ -84,17 +106,19 @@
                         <version>1.2.1</version>
                     </dependency>
                 </dependencies>
+            </plugin>
 
+            <!-- JMH executable JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
                 <configuration>
-                    <targetClasses>
-                        <param>hotel.management.system.*</param>
-                    </targetClasses>
-                    <targetTests>
-                        <param>hotel.management.system.*</param>
-                    </targetTests>
-                    <outputFormats>
-                        <param>HTML</param>
-                    </outputFormats>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.openjdk.jmh.Main</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
 
