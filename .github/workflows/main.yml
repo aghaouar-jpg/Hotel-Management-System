@@ -1,35 +1,33 @@
- name: Java CI with OpenJML (Task 2)
-
+name: Java CI with OpenJML
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, open-jml ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  build:
+  openjml-verification:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: 21
 
       - name: Download OpenJML
         run: |
-          wget https://github.com/OpenJML/OpenJML/releases/download/21.0.18/openjml-ubuntu-22.04-21.0.18.zip
-          unzip openjml-ubuntu-22.04-21.0.18.zip
+          wget https://github.com/OpenJML/OpenJML/releases/download/21-0.18/openjml-ubuntu-22.04-21-0.18.zip
+          unzip openjml-ubuntu-22.04-21-0.18.zip
 
-      - name: Verify JML specifications
+      - name: Run OpenJML verification
         run: |
-          openjml_dir=$(ls -d openjml*)
-          $openjml_dir/openjml \
+          ./openjml/openjml \
+            --esc \
             -cp "HotelManagementSystem/lib/*" \
-            -d out \
-            HotelManagementSystem/src/hotel/management/system/conn.java \
-            HotelManagementSystem/src/hotel/management/system/Login.java
+            $(find HotelManagementSystem/src -name "*.java")
