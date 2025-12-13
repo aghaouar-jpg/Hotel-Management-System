@@ -1,4 +1,4 @@
-name: Java CI
+name: Java CI with OpenJML
 
 on:
   push:
@@ -11,15 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: '17'
-          distribution: 'temurin'
 
-      - name: Compile Java project
+      - name: Download OpenJML
         run: |
-          mkdir -p out
-          javac -cp "HotelManagementSystem/lib/rs2xml.jar" -d out $(find HotelManagementSystem/src -name "*.java")
+          wget https://github.com/OpenJML/OpenJML/releases/download/21.0.18/openjml-ubuntu-22.04-21.0.18.zip
+          unzip openjml-ubuntu-22.04-21.0.18.zip
+
+      - name: Verify JML specifications
+        run: |
+          openjml_dir=$(ls -d openjml*)
+          $openjml_dir/openjml \
+            -cp "HotelManagementSystem/lib/*" \
+            -d out \
+            HotelManagementSystem/src/hotel/management/system/conn.java \
+            HotelManagementSystem/src/hotel/management/system/Login.java
