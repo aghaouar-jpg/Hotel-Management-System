@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UpdateCheck.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">UpdateCheck.java</span></div><h1>UpdateCheck.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+import java.awt.BorderLayout;
+import java.awt.*;
+
+import java.sql.*;	
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class UpdateCheck extends JFrame {
+<span class="nc" id="L20">	Connection conn = null;</span>
+<span class="nc" id="L21">	PreparedStatement pst = null;</span>
+	private JPanel contentPane;
+	private JTextField txt_ID;
+	private JTextField txt_Room;
+	private JTextField txt_Status;
+	private JTextField txt_Date;
+	private JTextField txt_Time;
+	private JTextField txt_Payment;
+
+        Choice c1, c2;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L35">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L38">					UpdateCheck frame = new UpdateCheck();</span>
+<span class="nc" id="L39">					frame.setVisible(true);</span>
+<span class="nc" id="L40">				} catch (Exception e) {</span>
+<span class="nc" id="L41">					e.printStackTrace();</span>
+<span class="nc" id="L42">				}</span>
+<span class="nc" id="L43">			}</span>
+		});
+<span class="nc" id="L45">	}</span>
+	public void close(){
+<span class="nc" id="L47">		this.dispose();</span>
+<span class="nc" id="L48">	}</span>
+
+	/**
+	 * Create the frame.
+	 * @throws SQLException 
+	 */
+<span class="nc" id="L54">	public UpdateCheck() throws SQLException {</span>
+		//conn = Javaconnect.getDBConnection();
+<span class="nc" id="L56">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L57">		setBounds(500, 200, 950, 500);</span>
+<span class="nc" id="L58">		contentPane = new JPanel();</span>
+<span class="nc" id="L59">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L60">		setContentPane(contentPane);</span>
+<span class="nc" id="L61">		contentPane.setLayout(null);</span>
+		
+<span class="nc" id="L63">		JLabel lblUpdateCheckStatus = new JLabel(&quot;Check-In Details&quot;);</span>
+<span class="nc" id="L64">		lblUpdateCheckStatus.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 20));</span>
+<span class="nc" id="L65">		lblUpdateCheckStatus.setBounds(124, 11, 222, 25);</span>
+<span class="nc" id="L66">		contentPane.add(lblUpdateCheckStatus);</span>
+                
+<span class="nc" id="L68">                ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/nine.jpg&quot;));</span>
+<span class="nc" id="L69">                JLabel l1 = new JLabel(i1);</span>
+<span class="nc" id="L70">                l1.setBounds(450,70,476,270);</span>
+<span class="nc" id="L71">                add(l1);</span>
+		
+<span class="nc" id="L73">		JLabel lblNewLabel = new JLabel(&quot;ID:&quot;);</span>
+<span class="nc" id="L74">		lblNewLabel.setBounds(25, 88, 46, 14);</span>
+<span class="nc" id="L75">		contentPane.add(lblNewLabel);</span>
+                
+<span class="nc" id="L77">                c1 = new Choice();</span>
+                try{
+<span class="nc" id="L79">                    conn c = new conn();</span>
+<span class="nc" id="L80">                    ResultSet rs = c.s.executeQuery(&quot;select * from customer&quot;);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L82">                        c1.add(rs.getString(&quot;number&quot;));    </span>
+                    }
+<span class="nc" id="L84">                }catch(Exception e){ }</span>
+<span class="nc" id="L85">                c1.setBounds(248, 85, 140, 20);</span>
+<span class="nc" id="L86">		contentPane.add(c1);</span>
+		
+<span class="nc" id="L88">		JLabel lblNewLabel_1 = new JLabel(&quot;Room Number :&quot;);</span>
+<span class="nc" id="L89">		lblNewLabel_1.setBounds(25, 129, 107, 14);</span>
+<span class="nc" id="L90">		contentPane.add(lblNewLabel_1);</span>
+                
+                
+<span class="nc" id="L93">                txt_ID = new JTextField();</span>
+<span class="nc" id="L94">                txt_ID.setBounds(248, 126, 140, 20);</span>
+<span class="nc" id="L95">		contentPane.add(txt_ID);</span>
+		
+<span class="nc" id="L97">		JLabel lblNewLabel_2 = new JLabel(&quot;Name : &quot;);</span>
+<span class="nc" id="L98">		lblNewLabel_2.setBounds(25, 174, 97, 14);</span>
+<span class="nc" id="L99">		contentPane.add(lblNewLabel_2);</span>
+		
+<span class="nc" id="L101">		JLabel lblNewLabel_3 = new JLabel(&quot;Checked-in :&quot;);</span>
+<span class="nc" id="L102">		lblNewLabel_3.setBounds(25, 216, 107, 14);</span>
+<span class="nc" id="L103">		contentPane.add(lblNewLabel_3);</span>
+		
+<span class="nc" id="L105">		JLabel lblNewLabel_4 = new JLabel(&quot;Amount Paid (Rs) : &quot;);</span>
+<span class="nc" id="L106">		lblNewLabel_4.setBounds(25, 261, 107, 14);</span>
+<span class="nc" id="L107">		contentPane.add(lblNewLabel_4);</span>
+		
+<span class="nc" id="L109">		JLabel lblNewLabel_5 = new JLabel(&quot;Pending Amount (Rs) : &quot;);</span>
+<span class="nc" id="L110">		lblNewLabel_5.setBounds(25, 302, 150, 14);</span>
+<span class="nc" id="L111">		contentPane.add(lblNewLabel_5);</span>
+
+		
+<span class="nc" id="L114">		txt_Status = new JTextField();</span>
+<span class="nc" id="L115">		txt_Status.setBounds(248, 171, 140, 20);</span>
+<span class="nc" id="L116">		contentPane.add(txt_Status);</span>
+<span class="nc" id="L117">		txt_Status.setColumns(10);</span>
+		
+<span class="nc" id="L119">		txt_Date = new JTextField();</span>
+<span class="nc" id="L120">		txt_Date.setBounds(248, 216, 140, 20);</span>
+<span class="nc" id="L121">		contentPane.add(txt_Date);</span>
+<span class="nc" id="L122">		txt_Date.setColumns(10);</span>
+		
+<span class="nc" id="L124">		txt_Time = new JTextField();</span>
+<span class="nc" id="L125">		txt_Time.setBounds(248, 258, 140, 20);</span>
+<span class="nc" id="L126">		contentPane.add(txt_Time);</span>
+<span class="nc" id="L127">		txt_Time.setColumns(10);</span>
+		
+<span class="nc" id="L129">		txt_Payment = new JTextField();</span>
+<span class="nc" id="L130">		txt_Payment.setBounds(248, 299, 140, 20);</span>
+<span class="nc" id="L131">		contentPane.add(txt_Payment);</span>
+<span class="nc" id="L132">		txt_Payment.setColumns(10);</span>
+		
+<span class="nc" id="L134">		JButton btnUpdate = new JButton(&quot;Update&quot;);</span>
+<span class="nc" id="L135">		btnUpdate.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent ae) { 
+                            try{
+<span class="nc" id="L138">                                conn c = new conn();</span>
+                                
+<span class="nc" id="L140">                                String s1 = c1.getSelectedItem();</span>
+<span class="nc" id="L141">				String s2 = txt_ID.getText(); //room_number;    </span>
+<span class="nc" id="L142">                                String s3 = txt_Status.getText(); //name    </span>
+<span class="nc" id="L143">                                String s4 = txt_Date.getText(); //status;    </span>
+<span class="nc" id="L144">                                String s5 = txt_Time.getText(); //deposit    </span>
+				
+<span class="nc" id="L146">                                c.s.executeUpdate(&quot;update customer set room_number = '&quot;+s2+&quot;', name = '&quot;+s3+&quot;', status = '&quot;+s4+&quot;', deposit = '&quot;+s5+&quot;' where number = '&quot;+s1+&quot;'&quot;);</span>
+                                
+<span class="nc" id="L148">                                JOptionPane.showMessageDialog(null, &quot;Data Updated Successfully&quot;);</span>
+<span class="nc" id="L149">                                new Reception().setVisible(true);</span>
+<span class="nc" id="L150">                                setVisible(false);</span>
+<span class="nc" id="L151">                            }catch(Exception ee){</span>
+<span class="nc" id="L152">                                System.out.println(ee);</span>
+<span class="nc" id="L153">                            }				</span>
+				
+				
+				
+<span class="nc" id="L157">			}</span>
+		});
+<span class="nc" id="L159">		btnUpdate.setBounds(168, 378, 89, 23);</span>
+<span class="nc" id="L160">                btnUpdate.setBackground(Color.BLACK);</span>
+<span class="nc" id="L161">                btnUpdate.setForeground(Color.WHITE);</span>
+<span class="nc" id="L162">		contentPane.add(btnUpdate);</span>
+		
+<span class="nc" id="L164">		JButton btnExit = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L165">		btnExit.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L167">				new Reception().setVisible(true);</span>
+<span class="nc" id="L168">                                setVisible(false);</span>
+<span class="nc" id="L169">			}</span>
+		});
+<span class="nc" id="L171">		btnExit.setBounds(281, 378, 89, 23);</span>
+<span class="nc" id="L172">                btnExit.setBackground(Color.BLACK);</span>
+<span class="nc" id="L173">                btnExit.setForeground(Color.WHITE);</span>
+<span class="nc" id="L174">		contentPane.add(btnExit);</span>
+		
+<span class="nc" id="L176">		JButton btnAdd = new JButton(&quot;Check&quot;);</span>
+<span class="nc" id="L177">		btnAdd.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+                            try{
+<span class="nc" id="L180">				String s1 = c1.getSelectedItem();</span>
+<span class="nc" id="L181">				conn c = new conn();</span>
+<span class="nc" id="L182">                                ResultSet rs1 = c.s.executeQuery(&quot;select * from customer where number = &quot;+s1);</span>
+                                
+<span class="nc bnc" id="L184" title="All 2 branches missed.">                                while(rs1.next()){</span>
+<span class="nc" id="L185">                                    txt_ID.setText(rs1.getString(&quot;room_number&quot;));    </span>
+<span class="nc" id="L186">                                    txt_Status.setText(rs1.getString(&quot;name&quot;));    </span>
+<span class="nc" id="L187">                                    txt_Date.setText(rs1.getString(&quot;status&quot;));    </span>
+<span class="nc" id="L188">                                    txt_Time.setText(rs1.getString(&quot;deposit&quot;));    </span>
+                                }
+<span class="nc" id="L190">                            }catch(Exception ee){}</span>
+                            
+                            try{
+<span class="nc" id="L193">                                String total = &quot;&quot;;</span>
+<span class="nc" id="L194">                                conn c  = new conn();</span>
+<span class="nc" id="L195">                                ResultSet rs2 = c.s.executeQuery(&quot;select * from room where room_number = &quot;+txt_ID.getText());</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">                                while(rs2.next()){</span>
+<span class="nc" id="L197">                                    total = rs2.getString(&quot;price&quot;); </span>
+                                    
+                                }
+<span class="nc" id="L200">                                String paid = txt_Time.getText();</span>
+<span class="nc" id="L201">                                int pending = Integer.parseInt(total)- Integer.parseInt(paid);</span>
+                                
+<span class="nc" id="L203">                                txt_Payment.setText(Integer.toString(pending));</span>
+                                
+<span class="nc" id="L205">                            }catch(Exception ee){}</span>
+<span class="nc" id="L206">			}</span>
+		});
+<span class="nc" id="L208">		btnAdd.setBounds(56, 378, 89, 23);</span>
+<span class="nc" id="L209">                btnAdd.setBackground(Color.BLACK);</span>
+<span class="nc" id="L210">                btnAdd.setForeground(Color.WHITE);</span>
+<span class="nc" id="L211">		contentPane.add(btnAdd);</span>
+                
+<span class="nc" id="L213">                getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L214">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

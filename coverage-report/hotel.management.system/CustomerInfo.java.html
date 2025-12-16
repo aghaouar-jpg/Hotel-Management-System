@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">CustomerInfo.java</span></div><h1>CustomerInfo.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+import java.awt.BorderLayout;
+import java.awt.*;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import net.proteanit.sql.DbUtils;
+import java.sql.*;	
+import javax.swing.*;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class CustomerInfo extends JFrame {
+<span class="nc" id="L24">	Connection conn = null;</span>
+	private JPanel contentPane;
+	private JLabel lblId;
+	private JLabel lblNewLabel;
+	private JLabel lblGender;
+	private JTable table;
+	private JLabel lblCountry;
+	private JLabel lblRoom;
+	private JLabel lblStatus;
+	private JLabel lblNewLabel_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L39">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L42">					CustomerInfo frame = new CustomerInfo();</span>
+<span class="nc" id="L43">					frame.setVisible(true);</span>
+<span class="nc" id="L44">				} catch (Exception e) {</span>
+<span class="nc" id="L45">					e.printStackTrace();</span>
+<span class="nc" id="L46">				}</span>
+<span class="nc" id="L47">			}</span>
+		});
+<span class="nc" id="L49">	}</span>
+	public void close()
+	{
+<span class="nc" id="L52">		this.dispose();</span>
+<span class="nc" id="L53">	}</span>
+	/**
+	 * Create the frame.
+	 * @throws SQLException 
+	 */
+<span class="nc" id="L58">	public CustomerInfo() throws SQLException {</span>
+		//conn = Javaconnect.getDBConnection();
+<span class="nc" id="L60">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L61">		setBounds(530, 200, 900, 600);</span>
+<span class="nc" id="L62">		contentPane = new JPanel();</span>
+<span class="nc" id="L63">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L64">		setContentPane(contentPane);</span>
+<span class="nc" id="L65">		contentPane.setLayout(null);</span>
+
+		
+<span class="nc" id="L68">		JButton btnExit = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L69">		btnExit.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L71">				new Reception().setVisible(true);</span>
+<span class="nc" id="L72">                                setVisible(false);</span>
+<span class="nc" id="L73">			}</span>
+		});
+<span class="nc" id="L75">		btnExit.setBounds(450, 510, 120, 30);</span>
+<span class="nc" id="L76">                btnExit.setBackground(Color.BLACK);</span>
+<span class="nc" id="L77">                btnExit.setForeground(Color.WHITE);</span>
+<span class="nc" id="L78">		contentPane.add(btnExit);</span>
+		
+<span class="nc" id="L80">		JButton btnLoadData = new JButton(&quot;Load Data&quot;);</span>
+<span class="nc" id="L81">		btnLoadData.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+<span class="nc" id="L84">                                    conn c  = new conn();</span>
+                                    
+<span class="nc" id="L86">				String displayCustomersql = &quot;select * from Customer&quot;;</span>
+<span class="nc" id="L87">				ResultSet rs = c.s.executeQuery(displayCustomersql);</span>
+<span class="nc" id="L88">				table.setModel(DbUtils.resultSetToTableModel(rs));</span>
+			}
+<span class="nc" id="L90">				catch(Exception e)</span>
+				{
+<span class="nc" id="L92">					e.printStackTrace();</span>
+<span class="nc" id="L93">				}</span>
+<span class="nc" id="L94">			}</span>
+				
+			
+		});
+<span class="nc" id="L98">		btnLoadData.setBounds(300, 510, 120, 30);</span>
+<span class="nc" id="L99">                btnLoadData.setBackground(Color.BLACK);</span>
+<span class="nc" id="L100">                btnLoadData.setForeground(Color.WHITE);</span>
+<span class="nc" id="L101">		contentPane.add(btnLoadData);</span>
+		
+<span class="nc" id="L103">		lblId = new JLabel(&quot;ID&quot;);</span>
+<span class="nc" id="L104">		lblId.setBounds(31, 11, 46, 14);</span>
+<span class="nc" id="L105">		contentPane.add(lblId);</span>
+                
+<span class="nc" id="L107">                JLabel l1 = new JLabel(&quot;Number&quot;);</span>
+<span class="nc" id="L108">		l1.setBounds(150, 11, 46, 14);</span>
+<span class="nc" id="L109">		contentPane.add(l1);</span>
+		
+<span class="nc" id="L111">		lblNewLabel = new JLabel(&quot;Name&quot;);</span>
+<span class="nc" id="L112">		lblNewLabel.setBounds(270, 11, 65, 14);</span>
+<span class="nc" id="L113">		contentPane.add(lblNewLabel);</span>
+		
+<span class="nc" id="L115">		lblGender = new JLabel(&quot;Gender&quot;);</span>
+<span class="nc" id="L116">		lblGender.setBounds(360, 11, 46, 14);</span>
+<span class="nc" id="L117">		contentPane.add(lblGender);</span>
+		
+<span class="nc" id="L119">		table = new JTable();</span>
+<span class="nc" id="L120">		table.setBounds(0, 40, 900, 450);</span>
+<span class="nc" id="L121">		contentPane.add(table);</span>
+		
+<span class="nc" id="L123">		lblCountry = new JLabel(&quot;Country&quot;);</span>
+<span class="nc" id="L124">		lblCountry.setBounds(480, 11, 46, 14);</span>
+<span class="nc" id="L125">		contentPane.add(lblCountry);</span>
+		
+<span class="nc" id="L127">		lblRoom = new JLabel(&quot;Room&quot;);</span>
+<span class="nc" id="L128">		lblRoom.setBounds(600, 11, 46, 14);</span>
+<span class="nc" id="L129">		contentPane.add(lblRoom);</span>
+		
+<span class="nc" id="L131">		lblStatus = new JLabel(&quot;Check-in Status&quot;);</span>
+<span class="nc" id="L132">		lblStatus.setBounds(680, 11, 100, 14);</span>
+<span class="nc" id="L133">		contentPane.add(lblStatus);</span>
+		
+<span class="nc" id="L135">		lblNewLabel_1 = new JLabel(&quot;Deposit&quot;);</span>
+<span class="nc" id="L136">		lblNewLabel_1.setBounds(800, 11, 100, 14);</span>
+<span class="nc" id="L137">		contentPane.add(lblNewLabel_1);</span>
+                
+<span class="nc" id="L139">                getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L140">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

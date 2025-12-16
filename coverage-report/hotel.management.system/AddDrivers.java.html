@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddDrivers.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">AddDrivers.java</span></div><h1>AddDrivers.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.*;
+
+public class AddDrivers extends JFrame implements ActionListener{
+
+    private JPanel contentPane;
+    private JTextField t1,t2,t3,t4, t5;
+    private JComboBox comboBox, comboBox_1;
+    JButton b1,b2;
+    Choice c1;
+
+    public static void main(String[] args) {
+<span class="nc" id="L25">        new AddDrivers().setVisible(true);</span>
+<span class="nc" id="L26">    }</span>
+
+
+<span class="nc" id="L29">    public AddDrivers() {</span>
+<span class="nc" id="L30">        setBounds(450, 200, 1000, 500);</span>
+<span class="nc" id="L31">	contentPane = new JPanel();</span>
+<span class="nc" id="L32">	setContentPane(contentPane);</span>
+<span class="nc" id="L33">	contentPane.setLayout(null);</span>
+        
+<span class="nc" id="L35">        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/eleven.jpg&quot;));</span>
+<span class="nc" id="L36">                Image i3 = i1.getImage().getScaledInstance(500, 300,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L37">                ImageIcon i2 = new ImageIcon(i3);</span>
+<span class="nc" id="L38">                JLabel l15 = new JLabel(i2);</span>
+<span class="nc" id="L39">                l15.setBounds(400,30,500,370);</span>
+<span class="nc" id="L40">                add(l15);</span>
+        
+<span class="nc" id="L42">        JLabel l10 = new JLabel(&quot;Add Drivers&quot;);</span>
+<span class="nc" id="L43">        l10.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 18));</span>
+<span class="nc" id="L44">	l10.setBounds(194, 10, 120, 22);</span>
+<span class="nc" id="L45">	contentPane.add(l10);</span>
+        
+	
+        
+<span class="nc" id="L49">	JLabel l1 = new JLabel(&quot;Name&quot;);</span>
+<span class="nc" id="L50">	l1.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L51">	l1.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L52">	l1.setBounds(64, 70, 102, 22);</span>
+<span class="nc" id="L53">	contentPane.add(l1);</span>
+        
+        
+<span class="nc" id="L56">        t1 = new JTextField();</span>
+<span class="nc" id="L57">	t1.setBounds(174, 70, 156, 20);</span>
+<span class="nc" id="L58">	contentPane.add(t1);</span>
+        
+
+<span class="nc" id="L61">	JLabel l2 = new JLabel(&quot;Age&quot;);</span>
+<span class="nc" id="L62">	l2.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L63">	l2.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L64">	l2.setBounds(64, 110, 102, 22);</span>
+<span class="nc" id="L65">	contentPane.add(l2);</span>
+        
+<span class="nc" id="L67">        t2 = new JTextField();</span>
+<span class="nc" id="L68">	t2.setBounds(174, 110, 156, 20);</span>
+<span class="nc" id="L69">	contentPane.add(t2);</span>
+
+
+<span class="nc" id="L72">	JLabel l3 = new JLabel(&quot;Gender&quot;);</span>
+<span class="nc" id="L73">	l3.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L74">	l3.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L75">	l3.setBounds(64, 150, 102, 22);</span>
+<span class="nc" id="L76">	contentPane.add(l3);</span>
+        
+<span class="nc" id="L78">        comboBox = new JComboBox(new String[] { &quot;Male&quot;, &quot;Female&quot; });</span>
+<span class="nc" id="L79">	comboBox.setBounds(176, 150, 154, 20);</span>
+<span class="nc" id="L80">	contentPane.add(comboBox);</span>
+
+<span class="nc" id="L82">	JLabel l4 = new JLabel(&quot;Car Company&quot;);</span>
+<span class="nc" id="L83">	l4.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L84">	l4.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L85">	l4.setBounds(64, 190, 102, 22);</span>
+<span class="nc" id="L86">	contentPane.add(l4);</span>
+        
+<span class="nc" id="L88">        t3 = new JTextField();</span>
+<span class="nc" id="L89">	t3.setBounds(174, 190, 156, 20);</span>
+<span class="nc" id="L90">	contentPane.add(t3);</span>
+
+<span class="nc" id="L92">        JLabel l5 = new JLabel(&quot;Car Brand&quot;);</span>
+<span class="nc" id="L93">	l5.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L94">	l5.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L95">	l5.setBounds(64, 230, 102, 22);</span>
+<span class="nc" id="L96">	contentPane.add(l5);</span>
+
+
+<span class="nc" id="L99">        t4 = new JTextField();</span>
+<span class="nc" id="L100">	t4.setBounds(174, 230, 156, 20);</span>
+<span class="nc" id="L101">	contentPane.add(t4);</span>
+
+	
+<span class="nc" id="L104">        JLabel l6 = new JLabel(&quot;Available&quot;);</span>
+<span class="nc" id="L105">	l6.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L106">	l6.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L107">	l6.setBounds(64, 270, 102, 22);</span>
+<span class="nc" id="L108">	contentPane.add(l6);</span>
+
+
+<span class="nc" id="L111">        comboBox_1 = new JComboBox(new String[] { &quot;Yes&quot;, &quot;No&quot; });</span>
+<span class="nc" id="L112">	comboBox_1.setBounds(176, 270, 154, 20);</span>
+<span class="nc" id="L113">	contentPane.add(comboBox_1);</span>
+
+        
+<span class="nc" id="L116">        JLabel l7 = new JLabel(&quot;Location&quot;);</span>
+<span class="nc" id="L117">	l7.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L118">	l7.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L119">	l7.setBounds(64, 310, 102, 22);</span>
+<span class="nc" id="L120">	contentPane.add(l7);</span>
+
+
+<span class="nc" id="L123">        t5 = new JTextField();</span>
+<span class="nc" id="L124">	t5.setBounds(174, 310, 156, 20);</span>
+<span class="nc" id="L125">	contentPane.add(t5);</span>
+        
+	
+
+<span class="nc" id="L129">	b1 = new JButton(&quot;Add&quot;);</span>
+<span class="nc" id="L130">	b1.addActionListener(this);</span>
+<span class="nc" id="L131">	b1.setBounds(64, 380, 111, 33);</span>
+<span class="nc" id="L132">        b1.setBackground(Color.BLACK);</span>
+<span class="nc" id="L133">        b1.setForeground(Color.WHITE);</span>
+<span class="nc" id="L134">	contentPane.add(b1);</span>
+
+<span class="nc" id="L136">	b2 = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L137">	b2.addActionListener(this);</span>
+<span class="nc" id="L138">	b2.setBounds(198, 380, 111, 33);</span>
+<span class="nc" id="L139">        b2.setBackground(Color.BLACK);</span>
+<span class="nc" id="L140">        b2.setForeground(Color.WHITE);</span>
+<span class="nc" id="L141">	contentPane.add(b2);</span>
+
+	
+<span class="nc" id="L144">        contentPane.setBackground(Color.WHITE);</span>
+    
+<span class="nc" id="L146">    }</span>
+    
+    public void actionPerformed(ActionEvent ae){
+        try{
+            
+<span class="nc bnc" id="L151" title="All 2 branches missed.">            if(ae.getSource() == b1){</span>
+                try{
+<span class="nc" id="L153">                conn c = new conn();</span>
+<span class="nc" id="L154">                String name = t1.getText();</span>
+<span class="nc" id="L155">                String age = t2.getText();</span>
+<span class="nc" id="L156">                String gender = (String)comboBox.getSelectedItem();</span>
+<span class="nc" id="L157">                String company  = t3.getText();</span>
+<span class="nc" id="L158">                String brand = t4.getText();</span>
+<span class="nc" id="L159">                String available = (String)comboBox_1.getSelectedItem();</span>
+<span class="nc" id="L160">                String location = t5.getText();</span>
+<span class="nc" id="L161">                String str = &quot;INSERT INTO driver values( '&quot;+name+&quot;', '&quot;+age+&quot;', '&quot;+gender+&quot;','&quot;+company+&quot;', '&quot;+brand+&quot;', '&quot;+available+&quot;','&quot;+location+&quot;')&quot;;</span>
+              
+                
+<span class="nc" id="L164">		c.s.executeUpdate(str);</span>
+<span class="nc" id="L165">		JOptionPane.showMessageDialog(null, &quot;Driver Successfully Added&quot;);</span>
+<span class="nc" id="L166">                this.setVisible(false);</span>
+               
+<span class="nc" id="L168">                }catch(Exception ee){</span>
+<span class="nc" id="L169">                    System.out.println(ee);</span>
+<span class="nc" id="L170">                }</span>
+            }
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            else if(ae.getSource() == b2){</span>
+<span class="nc" id="L173">                this.setVisible(false);</span>
+            }
+<span class="nc" id="L175">        }catch(Exception eee){</span>
+            
+<span class="nc" id="L177">        }</span>
+<span class="nc" id="L178">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

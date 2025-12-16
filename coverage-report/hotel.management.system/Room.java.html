@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Room.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">Room.java</span></div><h1>Room.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+import java.awt.BorderLayout;
+import java.awt.*;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import net.proteanit.sql.DbUtils;
+
+import javax.swing.JTable;
+import java.sql.*;	
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+public class Room extends JFrame {
+<span class="nc" id="L23">	Connection conn = null;</span>
+	private JPanel contentPane;
+	private JTable table;
+	private JLabel lblAvailability;
+	private JLabel lblCleanStatus;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblRoomNumber;
+	private JLabel lblId;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L37">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L40">					Room frame = new Room();</span>
+<span class="nc" id="L41">					frame.setVisible(true);</span>
+<span class="nc" id="L42">				} catch (Exception e) {</span>
+<span class="nc" id="L43">					e.printStackTrace();</span>
+<span class="nc" id="L44">				}</span>
+<span class="nc" id="L45">			}</span>
+		});
+<span class="nc" id="L47">	}</span>
+
+        
+<span class="nc" id="L50">	public Room() throws SQLException {</span>
+		//conn = Javaconnect.getDBConnection();
+<span class="nc" id="L52">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L53">		setBounds(450, 200, 1100, 600);</span>
+<span class="nc" id="L54">		contentPane = new JPanel();</span>
+<span class="nc" id="L55">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L56">		setContentPane(contentPane);</span>
+<span class="nc" id="L57">		contentPane.setLayout(null);</span>
+                
+<span class="nc" id="L59">                ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/eight.jpg&quot;));</span>
+<span class="nc" id="L60">                Image i3 = i1.getImage().getScaledInstance(600, 600,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L61">                ImageIcon i2 = new ImageIcon(i3);</span>
+<span class="nc" id="L62">                JLabel l1 = new JLabel(i2);</span>
+<span class="nc" id="L63">                l1.setBounds(500,0,600,600);</span>
+<span class="nc" id="L64">                add(l1);</span>
+                
+		
+<span class="nc" id="L67">		table = new JTable();</span>
+<span class="nc" id="L68">		table.setBounds(0, 40, 500, 400);</span>
+<span class="nc" id="L69">		contentPane.add(table);</span>
+		
+<span class="nc" id="L71">		JButton btnLoadData = new JButton(&quot;Load Data&quot;);</span>
+<span class="nc" id="L72">		btnLoadData.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try{
+<span class="nc" id="L75">                                    conn c = new conn();</span>
+<span class="nc" id="L76">					String displayCustomersql = &quot;select * from Room&quot;;</span>
+					//PreparedStatement pst = conn.prepareStatement(displayCustomersql);
+<span class="nc" id="L78">					ResultSet rs = c.s.executeQuery(displayCustomersql);</span>
+<span class="nc" id="L79">					table.setModel(DbUtils.resultSetToTableModel(rs));</span>
+					
+					
+				}
+<span class="nc" id="L83">				catch(Exception e1){</span>
+<span class="nc" id="L84">					e1.printStackTrace();</span>
+<span class="nc" id="L85">				}</span>
+<span class="nc" id="L86">			}</span>
+		});
+<span class="nc" id="L88">		btnLoadData.setBounds(100, 470, 120, 30);</span>
+<span class="nc" id="L89">                btnLoadData.setBackground(Color.BLACK);</span>
+<span class="nc" id="L90">                btnLoadData.setForeground(Color.WHITE);</span>
+<span class="nc" id="L91">		contentPane.add(btnLoadData);</span>
+		
+<span class="nc" id="L93">		JButton btnNewButton = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L94">		btnNewButton.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L96">				new Reception().setVisible(true);</span>
+<span class="nc" id="L97">                                setVisible(false);</span>
+<span class="nc" id="L98">			}</span>
+		});
+<span class="nc" id="L100">		btnNewButton.setBounds(290, 470, 120, 30);</span>
+<span class="nc" id="L101">                btnNewButton.setBackground(Color.BLACK);</span>
+<span class="nc" id="L102">                btnNewButton.setForeground(Color.WHITE);</span>
+<span class="nc" id="L103">		contentPane.add(btnNewButton);</span>
+		
+<span class="nc" id="L105">		lblAvailability = new JLabel(&quot;Availability&quot;);</span>
+<span class="nc" id="L106">		lblAvailability.setBounds(119, 15, 69, 14);</span>
+<span class="nc" id="L107">		contentPane.add(lblAvailability);</span>
+		
+<span class="nc" id="L109">		lblCleanStatus = new JLabel(&quot;Clean Status&quot;);</span>
+<span class="nc" id="L110">		lblCleanStatus.setBounds(216, 15, 76, 14);</span>
+<span class="nc" id="L111">		contentPane.add(lblCleanStatus);</span>
+		
+<span class="nc" id="L113">		lblNewLabel = new JLabel(&quot;Price&quot;);</span>
+<span class="nc" id="L114">		lblNewLabel.setBounds(330, 15, 46, 14);</span>
+<span class="nc" id="L115">		contentPane.add(lblNewLabel);</span>
+		
+<span class="nc" id="L117">		lblNewLabel_1 = new JLabel(&quot;Bed Type&quot;);</span>
+<span class="nc" id="L118">		lblNewLabel_1.setBounds(417, 15, 76, 14);</span>
+<span class="nc" id="L119">		contentPane.add(lblNewLabel_1);</span>
+
+		
+<span class="nc" id="L122">		lblId = new JLabel(&quot;Room Number&quot;);</span>
+<span class="nc" id="L123">		lblId.setBounds(12, 15, 90, 14);</span>
+<span class="nc" id="L124">		contentPane.add(lblId);</span>
+                
+<span class="nc" id="L126">                getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L127">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

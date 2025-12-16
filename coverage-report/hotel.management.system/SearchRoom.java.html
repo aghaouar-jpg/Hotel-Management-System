@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchRoom.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">SearchRoom.java</span></div><h1>SearchRoom.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+import java.awt.BorderLayout;
+import java.awt.*;
+
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import net.proteanit.sql.DbUtils;
+
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class SearchRoom extends JFrame {
+<span class="nc" id="L24">	Connection conn = null;</span>
+<span class="nc" id="L25">	PreparedStatement pst = null;</span>
+<span class="nc" id="L26">	ResultSet rs = null;</span>
+	private JPanel contentPane;
+	private JTextField txt_Type;
+	private JTable table;
+        Choice c1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L36">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L39">					SearchRoom frame = new SearchRoom();</span>
+<span class="nc" id="L40">					frame.setVisible(true);</span>
+<span class="nc" id="L41">				} catch (Exception e) {</span>
+<span class="nc" id="L42">					e.printStackTrace();</span>
+<span class="nc" id="L43">				}</span>
+<span class="nc" id="L44">			}</span>
+		});
+<span class="nc" id="L46">	}</span>
+	public void close()
+	{
+<span class="nc" id="L49">		this.dispose();</span>
+<span class="nc" id="L50">	}</span>
+
+	/**
+	 * Create the frame.
+	 * @throws SQLException
+	 */
+<span class="nc" id="L56">	public SearchRoom() throws SQLException {</span>
+		//conn = Javaconnect.getDBConnection();
+<span class="nc" id="L58">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L59">		setBounds(530, 200, 700, 500);</span>
+<span class="nc" id="L60">		contentPane = new JPanel();</span>
+<span class="nc" id="L61">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L62">		setContentPane(contentPane);</span>
+<span class="nc" id="L63">		contentPane.setLayout(null);</span>
+		
+<span class="nc" id="L65">		JLabel lblSearchForRoom = new JLabel(&quot;Search For Room&quot;);</span>
+<span class="nc" id="L66">		lblSearchForRoom.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 20));</span>
+<span class="nc" id="L67">		lblSearchForRoom.setBounds(250, 11, 186, 31);</span>
+<span class="nc" id="L68">		contentPane.add(lblSearchForRoom);</span>
+		
+<span class="nc" id="L70">		JLabel lblRoomAvailable = new JLabel(&quot;Room Bed Type:&quot;);</span>
+<span class="nc" id="L71">		lblRoomAvailable.setBounds(50, 73, 96, 14);</span>
+<span class="nc" id="L72">		contentPane.add(lblRoomAvailable);</span>
+		
+<span class="nc" id="L74">		JLabel lblRoomType = new JLabel(&quot;Room Number&quot;);</span>
+<span class="nc" id="L75">		lblRoomType.setBounds(23, 162, 96, 14);</span>
+<span class="nc" id="L76">		contentPane.add(lblRoomType);</span>
+		
+<span class="nc" id="L78">		JLabel lblRoomAvailable_1 = new JLabel(&quot;Availability&quot;);</span>
+<span class="nc" id="L79">		lblRoomAvailable_1.setBounds(175, 162, 120, 14);</span>
+<span class="nc" id="L80">		contentPane.add(lblRoomAvailable_1);</span>
+		
+<span class="nc" id="L82">		JLabel lblPrice_1 = new JLabel(&quot;Price&quot;);</span>
+<span class="nc" id="L83">		lblPrice_1.setBounds(458, 162, 46, 14);</span>
+<span class="nc" id="L84">		contentPane.add(lblPrice_1);</span>
+                
+<span class="nc" id="L86">                JLabel l1 = new JLabel(&quot;Bed Type&quot;);</span>
+<span class="nc" id="L87">		l1.setBounds(580, 162, 96, 14);</span>
+<span class="nc" id="L88">		contentPane.add(l1);</span>
+		
+<span class="nc" id="L90">		JCheckBox checkRoom = new JCheckBox(&quot;Only display Available&quot;);</span>
+<span class="nc" id="L91">		checkRoom.setBounds(400, 69, 205, 23);</span>
+<span class="nc" id="L92">                checkRoom.setBackground(Color.WHITE);</span>
+<span class="nc" id="L93">		contentPane.add(checkRoom);</span>
+		
+		
+<span class="nc" id="L96">                c1 = new Choice();</span>
+<span class="nc" id="L97">                c1.add(&quot;Single Bed&quot;);</span>
+<span class="nc" id="L98">                c1.add(&quot;Double Bed&quot;);</span>
+<span class="nc" id="L99">                c1.setBounds(153, 70, 120, 20);</span>
+<span class="nc" id="L100">		contentPane.add(c1);</span>
+		
+<span class="nc" id="L102">		JButton btnSearch = new JButton(&quot;Search&quot;);</span>
+<span class="nc" id="L103">		btnSearch.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L105">				String SQL = &quot;select * from Room where bed_type = '&quot;+c1.getSelectedItem()+&quot;'&quot;;</span>
+<span class="nc" id="L106">				String SQL2 = &quot;select * from Room where availability = 'Available' AND bed_type = '&quot;+c1.getSelectedItem()+&quot;'&quot;;</span>
+			try{			
+<span class="nc" id="L108">                                conn c = new conn();</span>
+<span class="nc" id="L109">				rs = c.s.executeQuery(SQL);</span>
+<span class="nc" id="L110">				table.setModel(DbUtils.resultSetToTableModel(rs));</span>
+				
+<span class="nc bnc" id="L112" title="All 2 branches missed.">				if(checkRoom.isSelected())</span>
+				{	
+<span class="nc" id="L114">					rs = c.s.executeQuery(SQL2);</span>
+<span class="nc" id="L115">					table.setModel(DbUtils.resultSetToTableModel(rs));</span>
+				}
+				
+				
+<span class="nc" id="L119">			}catch (SQLException ss)</span>
+			{
+<span class="nc" id="L121">				ss.printStackTrace();</span>
+<span class="nc" id="L122">			}</span>
+			
+<span class="nc" id="L124">			}</span>
+		});
+<span class="nc" id="L126">		btnSearch.setBounds(200, 400, 120, 30);</span>
+<span class="nc" id="L127">                btnSearch.setBackground(Color.BLACK);</span>
+<span class="nc" id="L128">                btnSearch.setForeground(Color.WHITE);</span>
+<span class="nc" id="L129">		contentPane.add(btnSearch);</span>
+		
+<span class="nc" id="L131">		JButton btnExit = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L132">		btnExit.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L134">				new Reception().setVisible(true);</span>
+<span class="nc" id="L135">                                setVisible(false);</span>
+<span class="nc" id="L136">			}</span>
+		});
+<span class="nc" id="L138">		btnExit.setBounds(380, 400, 120, 30);</span>
+<span class="nc" id="L139">                btnExit.setBackground(Color.BLACK);</span>
+<span class="nc" id="L140">                btnExit.setForeground(Color.WHITE);</span>
+<span class="nc" id="L141">		contentPane.add(btnExit);</span>
+		
+<span class="nc" id="L143">		table = new JTable();</span>
+<span class="nc" id="L144">		table.setBounds(0, 187, 700, 300);</span>
+<span class="nc" id="L145">		contentPane.add(table);</span>
+		
+<span class="nc" id="L147">		JLabel lblCleanStatus = new JLabel(&quot;Clean Status&quot;);</span>
+<span class="nc" id="L148">		lblCleanStatus.setBounds(306, 162, 96, 14);</span>
+<span class="nc" id="L149">		contentPane.add(lblCleanStatus);</span>
+                
+<span class="nc" id="L151">                getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L152">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

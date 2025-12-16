@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NewCustomer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">NewCustomer.java</span></div><h1>NewCustomer.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+import java.awt.BorderLayout;
+import java.awt.*;
+import java.awt.EventQueue;
+
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Font;
+import java.awt.Image;
+import java.sql.*;	
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+public class NewCustomer extends JFrame {
+<span class="nc" id="L21">	Connection conn = null;</span>
+<span class="nc" id="L22">	PreparedStatement pst = null;</span>
+	private JPanel contentPane;
+	private JTextField t1,t2,t3,t4,t5,t6;
+        JComboBox comboBox;
+        JRadioButton r1,r2;
+        Choice c1;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L32">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L35">					NewCustomer frame = new NewCustomer();</span>
+<span class="nc" id="L36">					frame.setVisible(true);</span>
+<span class="nc" id="L37">				} catch (Exception e) {</span>
+<span class="nc" id="L38">					e.printStackTrace();</span>
+<span class="nc" id="L39">				}</span>
+<span class="nc" id="L40">			}</span>
+		});
+<span class="nc" id="L42">	}</span>
+
+<span class="nc" id="L44">	public NewCustomer() throws SQLException {</span>
+		
+<span class="nc" id="L46">                setBounds(530, 200, 850, 550);</span>
+<span class="nc" id="L47">		contentPane = new JPanel();</span>
+<span class="nc" id="L48">		setContentPane(contentPane);</span>
+<span class="nc" id="L49">		contentPane.setLayout(null);</span>
+                
+<span class="nc" id="L51">                ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/fifth.png&quot;));</span>
+<span class="nc" id="L52">                Image i3 = i1.getImage().getScaledInstance(300, 400,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L53">                ImageIcon i2 = new ImageIcon(i3);</span>
+<span class="nc" id="L54">                JLabel l1 = new JLabel(i2);</span>
+<span class="nc" id="L55">                l1.setBounds(480,10,300,500);</span>
+<span class="nc" id="L56">                add(l1); </span>
+		
+<span class="nc" id="L58">		JLabel lblName = new JLabel(&quot;NEW CUSTOMER FORM&quot;);</span>
+<span class="nc" id="L59">		lblName.setFont(new Font(&quot;Yu Mincho&quot;, Font.PLAIN, 20));</span>
+<span class="nc" id="L60">		lblName.setBounds(118, 11, 260, 53);</span>
+<span class="nc" id="L61">		contentPane.add(lblName);</span>
+                
+<span class="nc" id="L63">                JLabel lblId = new JLabel(&quot;ID :&quot;);</span>
+<span class="nc" id="L64">		lblId.setBounds(35, 76, 200, 14);</span>
+<span class="nc" id="L65">		contentPane.add(lblId);</span>
+                
+<span class="nc" id="L67">                comboBox = new JComboBox(new String[] {&quot;Passport&quot;, &quot;Aadhar Card&quot;, &quot;Voter Id&quot;, &quot;Driving license&quot;});</span>
+<span class="nc" id="L68">		comboBox.setBounds(271, 73, 150, 20);</span>
+<span class="nc" id="L69">		contentPane.add(comboBox);</span>
+                
+<span class="nc" id="L71">                JLabel l2 = new JLabel(&quot;Number :&quot;);</span>
+<span class="nc" id="L72">		l2.setBounds(35, 111, 200, 14);</span>
+<span class="nc" id="L73">		contentPane.add(l2);</span>
+                
+<span class="nc" id="L75">                t1 = new JTextField();</span>
+<span class="nc" id="L76">		t1.setBounds(271, 111, 150, 20);</span>
+<span class="nc" id="L77">		contentPane.add(t1);</span>
+<span class="nc" id="L78">		t1.setColumns(10);</span>
+		
+<span class="nc" id="L80">		JLabel lblName_1 = new JLabel(&quot;Name :&quot;);</span>
+<span class="nc" id="L81">		lblName_1.setBounds(35, 151, 200, 14);</span>
+<span class="nc" id="L82">		contentPane.add(lblName_1);</span>
+		
+<span class="nc" id="L84">		t2 = new JTextField();</span>
+<span class="nc" id="L85">		t2.setBounds(271, 151, 150, 20);</span>
+<span class="nc" id="L86">		contentPane.add(t2);</span>
+<span class="nc" id="L87">		t2.setColumns(10);</span>
+
+                
+<span class="nc" id="L90">		JLabel lblGender = new JLabel(&quot;Gender :&quot;);</span>
+<span class="nc" id="L91">		lblGender.setBounds(35, 191, 200, 14);</span>
+<span class="nc" id="L92">		contentPane.add(lblGender);</span>
+                
+<span class="nc" id="L94">                r1 = new JRadioButton(&quot;Male&quot;);</span>
+<span class="nc" id="L95">                r1.setFont(new Font(&quot;Raleway&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L96">                r1.setBackground(Color.WHITE);</span>
+<span class="nc" id="L97">                r1.setBounds(271, 191, 80, 12);</span>
+<span class="nc" id="L98">                add(r1);</span>
+                
+<span class="nc" id="L100">                r2 = new JRadioButton(&quot;Female&quot;);</span>
+<span class="nc" id="L101">                r2.setFont(new Font(&quot;Raleway&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L102">                r2.setBackground(Color.WHITE);</span>
+<span class="nc" id="L103">                r2.setBounds(350, 191, 100, 12);</span>
+<span class="nc" id="L104">		add(r2);</span>
+                
+<span class="nc" id="L106">		JLabel lblCountry = new JLabel(&quot;Country :&quot;);</span>
+<span class="nc" id="L107">		lblCountry.setBounds(35, 231, 200, 14);</span>
+<span class="nc" id="L108">		contentPane.add(lblCountry);</span>
+		
+<span class="nc" id="L110">		JLabel lblReserveRoomNumber = new JLabel(&quot;Allocated Room Number :&quot;);</span>
+<span class="nc" id="L111">		lblReserveRoomNumber.setBounds(35, 274, 200, 14);</span>
+<span class="nc" id="L112">		contentPane.add(lblReserveRoomNumber);</span>
+                
+<span class="nc" id="L114">                c1 = new Choice();</span>
+                try{
+<span class="nc" id="L116">                    conn c = new conn();</span>
+<span class="nc" id="L117">                    ResultSet rs = c.s.executeQuery(&quot;select * from room&quot;);</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L119">                        c1.add(rs.getString(&quot;room_number&quot;));    </span>
+                    }
+<span class="nc" id="L121">                }catch(Exception e){ }</span>
+<span class="nc" id="L122">                c1.setBounds(271, 274, 150, 20);</span>
+<span class="nc" id="L123">		contentPane.add(c1);</span>
+		
+<span class="nc" id="L125">		JLabel lblCheckInStatus = new JLabel(&quot;Checked-In :&quot;);</span>
+<span class="nc" id="L126">		lblCheckInStatus.setBounds(35, 316, 200, 14);</span>
+<span class="nc" id="L127">		contentPane.add(lblCheckInStatus);</span>
+		
+<span class="nc" id="L129">		JLabel lblDeposite = new JLabel(&quot;Deposit :&quot;);</span>
+<span class="nc" id="L130">		lblDeposite.setBounds(35, 359, 200, 14);</span>
+<span class="nc" id="L131">		contentPane.add(lblDeposite);</span>
+		
+		
+		
+		
+		
+<span class="nc" id="L137">		t3 = new JTextField();</span>
+<span class="nc" id="L138">		t3.setBounds(271, 231, 150, 20);</span>
+<span class="nc" id="L139">		contentPane.add(t3);</span>
+<span class="nc" id="L140">		t3.setColumns(10);</span>
+		
+		
+<span class="nc" id="L143">		t5 = new JTextField();</span>
+<span class="nc" id="L144">		t5.setBounds(271, 316, 150, 20);</span>
+<span class="nc" id="L145">		contentPane.add(t5);</span>
+<span class="nc" id="L146">		t5.setColumns(10);</span>
+		
+<span class="nc" id="L148">		t6 = new JTextField();</span>
+<span class="nc" id="L149">		t6.setBounds(271, 359, 150, 20);</span>
+<span class="nc" id="L150">		contentPane.add(t6);</span>
+<span class="nc" id="L151">		t6.setColumns(10);</span>
+
+<span class="nc" id="L153">		JButton btnNewButton = new JButton(&quot;Add&quot;);</span>
+<span class="nc" id="L154">		btnNewButton.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L156">                            conn c = new conn();</span>
+<span class="nc" id="L157">                            String radio = null;</span>
+                            
+<span class="nc bnc" id="L159" title="All 2 branches missed.">                            if(r1.isSelected()){ </span>
+<span class="nc" id="L160">                                radio = &quot;Male&quot;;</span>
+                            }
+<span class="nc bnc" id="L162" title="All 2 branches missed.">                            else if(r2.isSelected()){ </span>
+<span class="nc" id="L163">                                radio = &quot;Female&quot;;</span>
+                            }
+                            
+<span class="nc" id="L166">                            String s6 = c1.getSelectedItem();</span>
+                          
+                            try{
+	    			
+<span class="nc" id="L170">                                String s1 = (String)comboBox.getSelectedItem(); </span>
+<span class="nc" id="L171">	    			String s2 =  t1.getText();</span>
+<span class="nc" id="L172">	    			String s3 =  t2.getText();</span>
+<span class="nc" id="L173">                                String s4 =  radio;</span>
+<span class="nc" id="L174">	    			String s5 =  t3.getText();</span>
+<span class="nc" id="L175">	    			String s7 =  t5.getText();</span>
+<span class="nc" id="L176">                                String s8 =  t6.getText();</span>
+                                
+<span class="nc" id="L178">                                String q1 = &quot;insert into customer values('&quot;+s1+&quot;','&quot;+s2+&quot;','&quot;+s3+&quot;','&quot;+s4+&quot;','&quot;+s5+&quot;','&quot;+s6+&quot;','&quot;+s7+&quot;','&quot;+s8+&quot;')&quot;;</span>
+<span class="nc" id="L179">                                String q2 = &quot;update room set availability = 'Occupied' where room_number = &quot;+s6;</span>
+<span class="nc" id="L180">                                c.s.executeUpdate(q1);</span>
+<span class="nc" id="L181">                                c.s.executeUpdate(q2);</span>
+	    			
+	    			
+<span class="nc" id="L184">	    			JOptionPane.showMessageDialog(null, &quot;Data Inserted Successfully&quot;);</span>
+<span class="nc" id="L185">                                new Reception().setVisible(true);</span>
+<span class="nc" id="L186">                                setVisible(false);</span>
+<span class="nc" id="L187">	    		}catch(SQLException e1){</span>
+<span class="nc" id="L188">	    			System.out.println(e1.getMessage());</span>
+	    		}
+<span class="nc" id="L190">		    		catch(NumberFormatException s){</span>
+<span class="nc" id="L191">		    			JOptionPane.showMessageDialog(null, &quot;Please enter a valid Number&quot;);</span>
+<span class="nc" id="L192">			}</span>
+<span class="nc" id="L193">			}</span>
+		});
+<span class="nc" id="L195">		btnNewButton.setBounds(100, 430, 120, 30);</span>
+<span class="nc" id="L196">                btnNewButton.setBackground(Color.BLACK);</span>
+<span class="nc" id="L197">                btnNewButton.setForeground(Color.WHITE);</span>
+<span class="nc" id="L198">		contentPane.add(btnNewButton);</span>
+		
+<span class="nc" id="L200">		JButton btnExit = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L201">		btnExit.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L203">                            new Reception().setVisible(true);</span>
+<span class="nc" id="L204">                            setVisible(false);</span>
+<span class="nc" id="L205">			}</span>
+		}); 
+<span class="nc" id="L207">		btnExit.setBounds(260, 430, 120, 30);</span>
+<span class="nc" id="L208">                btnExit.setBackground(Color.BLACK);</span>
+<span class="nc" id="L209">                btnExit.setForeground(Color.WHITE);</span>
+<span class="nc" id="L210">		contentPane.add(btnExit);</span>
+                
+<span class="nc" id="L212">                getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L213">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

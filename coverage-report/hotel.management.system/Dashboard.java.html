@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Dashboard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">Dashboard.java</span></div><h1>Dashboard.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+
+public class Dashboard extends JFrame{
+
+    public static void main(String[] args) {
+<span class="nc" id="L17">        new Dashboard().setVisible(true);</span>
+<span class="nc" id="L18">    }</span>
+    
+    public Dashboard() {
+<span class="nc" id="L21">        super(&quot;HOTEL MANAGEMENT SYSTEM&quot;);</span>
+	
+<span class="nc" id="L23">        setForeground(Color.CYAN);</span>
+<span class="nc" id="L24">        setLayout(null); </span>
+
+        
+<span class="nc" id="L27">        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/third.jpg&quot;));</span>
+<span class="nc" id="L28">        Image i2 = i1.getImage().getScaledInstance(1950, 1000,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L29">        ImageIcon i3 = new ImageIcon(i2); </span>
+<span class="nc" id="L30">	JLabel NewLabel = new JLabel(i3);</span>
+<span class="nc" id="L31">	NewLabel.setBounds(0, 0, 1950, 1000); </span>
+<span class="nc" id="L32">        add(NewLabel);</span>
+        
+<span class="nc" id="L34">        JLabel AirlineManagementSystem = new JLabel(&quot;THE TAJ GROUP WELCOMES YOU&quot;);</span>
+<span class="nc" id="L35">	AirlineManagementSystem.setForeground(Color.WHITE);</span>
+<span class="nc" id="L36">        AirlineManagementSystem.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 46));</span>
+<span class="nc" id="L37">	AirlineManagementSystem.setBounds(600, 60, 1000, 85);</span>
+<span class="nc" id="L38">	NewLabel.add(AirlineManagementSystem);</span>
+		
+		
+<span class="nc" id="L41">        JMenuBar menuBar = new JMenuBar();</span>
+<span class="nc" id="L42">	setJMenuBar(menuBar);</span>
+		
+<span class="nc" id="L44">        JMenu AirlineSystem = new JMenu(&quot;HOTEL MANAGEMENT&quot;);</span>
+<span class="nc" id="L45">        AirlineSystem.setForeground(Color.BLUE);</span>
+<span class="nc" id="L46">	menuBar.add(AirlineSystem);</span>
+		
+<span class="nc" id="L48">        JMenuItem FlightDetails = new JMenuItem(&quot;RECEPTION&quot;);</span>
+<span class="nc" id="L49">	AirlineSystem.add(FlightDetails);</span>
+		
+<span class="nc" id="L51">	JMenu AirlineSystemHello = new JMenu(&quot;ADMIN&quot;);</span>
+<span class="nc" id="L52">        AirlineSystemHello.setForeground(Color.RED);</span>
+<span class="nc" id="L53">	menuBar.add(AirlineSystemHello);</span>
+        
+<span class="nc" id="L55">        JMenuItem FlightDetailshello1 = new JMenuItem(&quot;ADD EMPLOYEE&quot;);</span>
+<span class="nc" id="L56">	AirlineSystemHello.add(FlightDetailshello1);</span>
+        
+<span class="nc" id="L58">        FlightDetailshello1.addActionListener(new ActionListener(){</span>
+            public void actionPerformed(ActionEvent ae){
+                try{
+<span class="nc" id="L61">                    new AddEmployee().setVisible(true);</span>
+<span class="nc" id="L62">                }catch(Exception e ){}</span>
+<span class="nc" id="L63">            }</span>
+	});
+        
+
+<span class="nc" id="L67">        JMenuItem FlightDetailshello2 = new JMenuItem(&quot;ADD ROOMS&quot;);</span>
+<span class="nc" id="L68">	AirlineSystemHello.add(FlightDetailshello2);</span>
+        
+<span class="nc" id="L70">        FlightDetailshello2.addActionListener(new ActionListener(){</span>
+            public void actionPerformed(ActionEvent ae){
+                try{
+<span class="nc" id="L73">                    new AddRoom().setVisible(true);</span>
+<span class="nc" id="L74">                }catch(Exception e ){}</span>
+<span class="nc" id="L75">            }</span>
+	});
+        
+
+<span class="nc" id="L79">	FlightDetails.addActionListener(new ActionListener(){</span>
+            public void actionPerformed(ActionEvent ae){
+<span class="nc" id="L81">                new Reception();</span>
+<span class="nc" id="L82">            }</span>
+	});
+        
+        
+<span class="nc" id="L86">        JMenuItem FlightDetailshello3 = new JMenuItem(&quot;ADD DRIVERS&quot;);</span>
+<span class="nc" id="L87">	AirlineSystemHello.add(FlightDetailshello3);</span>
+        
+<span class="nc" id="L89">	FlightDetailshello3.addActionListener(new ActionListener(){</span>
+            public void actionPerformed(ActionEvent ae){
+                try{
+<span class="nc" id="L92">                    new AddDrivers().setVisible(true);</span>
+<span class="nc" id="L93">                }catch(Exception e ){}</span>
+<span class="nc" id="L94">            }</span>
+	});
+        
+		
+<span class="nc" id="L98">        setSize(1950,1090);</span>
+<span class="nc" id="L99">	setVisible(true);</span>
+<span class="nc" id="L100">        getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L101">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

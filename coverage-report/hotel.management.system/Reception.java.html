@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Reception.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">Reception.java</span></div><h1>Reception.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+import javax.swing.*;
+
+import java.sql.*;	
+import java.awt.event.*;
+import java.awt.*;
+
+public class Reception extends JFrame {
+
+	private JPanel contentPane;
+
+	public static void main(String[] args) {
+<span class="nc" id="L19">		new Reception();</span>
+<span class="nc" id="L20">	}</span>
+	
+<span class="nc" id="L22">	public Reception(){</span>
+		
+<span class="nc" id="L24">                setBounds(530, 200, 850, 570);</span>
+<span class="nc" id="L25">		contentPane = new JPanel();</span>
+<span class="nc" id="L26">		setContentPane(contentPane);</span>
+<span class="nc" id="L27">		contentPane.setLayout(null);</span>
+                
+<span class="nc" id="L29">                ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/fourth.jpg&quot;));</span>
+<span class="nc" id="L30">                Image i3 = i1.getImage().getScaledInstance(500, 500,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L31">                ImageIcon i2 = new ImageIcon(i3);</span>
+<span class="nc" id="L32">                JLabel l1 = new JLabel(i2);</span>
+<span class="nc" id="L33">                l1.setBounds(250,30,500,470);</span>
+<span class="nc" id="L34">                add(l1);</span>
+		
+<span class="nc" id="L36">		JButton btnNewCustomerForm = new JButton(&quot;New Customer Form&quot;);</span>
+<span class="nc" id="L37">		btnNewCustomerForm.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try{
+<span class="nc" id="L40">				NewCustomer custom = new NewCustomer();</span>
+<span class="nc" id="L41">				custom.setVisible(true);</span>
+<span class="nc" id="L42">                                setVisible(false);</span>
+<span class="nc" id="L43">			}catch(Exception e1){</span>
+<span class="nc" id="L44">				e1.printStackTrace();</span>
+<span class="nc" id="L45">			}</span>
+<span class="nc" id="L46">			}</span>
+		});
+<span class="nc" id="L48">		btnNewCustomerForm.setBounds(10, 30, 200, 30);</span>
+<span class="nc" id="L49">                btnNewCustomerForm.setBackground(Color.BLACK);</span>
+<span class="nc" id="L50">                btnNewCustomerForm.setForeground(Color.WHITE);</span>
+<span class="nc" id="L51">		contentPane.add(btnNewCustomerForm);</span>
+		
+<span class="nc" id="L53">		JButton btnNewButton = new JButton(&quot;Room&quot;);</span>
+<span class="nc" id="L54">		btnNewButton.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+<span class="nc" id="L57">				Room room = new Room();</span>
+<span class="nc" id="L58">				room.setVisible(true);</span>
+<span class="nc" id="L59">                                setVisible(false);</span>
+				}
+<span class="nc" id="L61">				catch(Exception e){</span>
+<span class="nc" id="L62">					e.printStackTrace();</span>
+<span class="nc" id="L63">				}</span>
+				
+<span class="nc" id="L65">			}</span>
+		});
+<span class="nc" id="L67">		btnNewButton.setBounds(10, 70, 200, 30);</span>
+<span class="nc" id="L68">                btnNewButton.setBackground(Color.BLACK);</span>
+<span class="nc" id="L69">                btnNewButton.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L71">		contentPane.add(btnNewButton);</span>
+		
+<span class="nc" id="L73">		JButton btnNewButton_1 = new JButton(&quot;Department&quot;);</span>
+<span class="nc" id="L74">		btnNewButton_1.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try{
+<span class="nc" id="L77">					Department dept = new Department();</span>
+<span class="nc" id="L78">					dept.setVisible(true);</span>
+<span class="nc" id="L79">					setVisible(false);</span>
+					
+				}
+<span class="nc" id="L82">				catch (Exception e1){</span>
+<span class="nc" id="L83">					e1.printStackTrace();</span>
+<span class="nc" id="L84">				}</span>
+			
+<span class="nc" id="L86">			}</span>
+		});
+<span class="nc" id="L88">		btnNewButton_1.setBounds(10, 110, 200, 30);</span>
+<span class="nc" id="L89">                btnNewButton_1.setBackground(Color.BLACK);</span>
+<span class="nc" id="L90">                btnNewButton_1.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L92">		contentPane.add(btnNewButton_1);</span>
+		
+<span class="nc" id="L94">		JButton btnNewButton_2 = new JButton(&quot;All Employee Info&quot;);</span>
+<span class="nc" id="L95">		btnNewButton_2.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try{
+				
+<span class="nc" id="L99">					Employee em = new Employee();</span>
+<span class="nc" id="L100">					em.setVisible(true);</span>
+<span class="nc" id="L101">					setVisible(false);</span>
+					
+				}
+<span class="nc" id="L104">				catch (Exception e1){</span>
+<span class="nc" id="L105">					e1.printStackTrace();</span>
+<span class="nc" id="L106">				}</span>
+			
+<span class="nc" id="L108">			}</span>
+		});
+<span class="nc" id="L110">		btnNewButton_2.setBounds(10, 150, 200, 30);                </span>
+<span class="nc" id="L111">                btnNewButton_2.setBackground(Color.BLACK);</span>
+<span class="nc" id="L112">                btnNewButton_2.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L114">		contentPane.add(btnNewButton_2);</span>
+		
+<span class="nc" id="L116">		JButton btnNewButton_3 = new JButton(&quot;Customer Info&quot;);</span>
+<span class="nc" id="L117">		btnNewButton_3.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try{
+					//error ---------------------
+<span class="nc" id="L121">					CustomerInfo customer = new CustomerInfo();</span>
+<span class="nc" id="L122">					customer.setVisible(true);				</span>
+<span class="nc" id="L123">					setVisible(false);</span>
+				}
+<span class="nc" id="L125">				catch (Exception e1){</span>
+<span class="nc" id="L126">					e1.printStackTrace();</span>
+<span class="nc" id="L127">				}</span>
+<span class="nc" id="L128">			}</span>
+		});
+<span class="nc" id="L130">		btnNewButton_3.setBounds(10, 190, 200, 30);</span>
+<span class="nc" id="L131">                btnNewButton_3.setBackground(Color.BLACK);</span>
+<span class="nc" id="L132">                btnNewButton_3.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L134">		contentPane.add(btnNewButton_3);</span>
+		
+<span class="nc" id="L136">		JButton btnManagerInfo = new JButton(&quot;Manager Info&quot;);</span>
+<span class="nc" id="L137">		btnManagerInfo.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try{
+<span class="nc" id="L140">				ManagerInfo mana = new ManagerInfo();</span>
+<span class="nc" id="L141">				mana.setVisible(true);</span>
+<span class="nc" id="L142">                                setVisible(false);</span>
+				}
+<span class="nc" id="L144">				catch (Exception e1){</span>
+<span class="nc" id="L145">					e1.printStackTrace();</span>
+<span class="nc" id="L146">				}</span>
+<span class="nc" id="L147">			}</span>
+		});
+<span class="nc" id="L149">		btnManagerInfo.setBounds(10, 230, 200, 30);</span>
+<span class="nc" id="L150">                btnManagerInfo.setBackground(Color.BLACK);</span>
+<span class="nc" id="L151">                btnManagerInfo.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L153">		contentPane.add(btnManagerInfo);</span>
+		
+<span class="nc" id="L155">		JButton btnNewButton_4 = new JButton(&quot;Check Out&quot;);</span>
+<span class="nc" id="L156">		btnNewButton_4.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				CheckOut check;
+				try {
+<span class="nc" id="L160">					check = new CheckOut();</span>
+<span class="nc" id="L161">					check.setVisible(true);</span>
+<span class="nc" id="L162">                                        setVisible(false);</span>
+<span class="nc" id="L163">				} catch (SQLException e1) {</span>
+					// TODO Auto-generated catch block
+<span class="nc" id="L165">					e1.printStackTrace();</span>
+<span class="nc" id="L166">				}</span>
+<span class="nc" id="L167">			}</span>
+		});
+<span class="nc" id="L169">		btnNewButton_4.setBounds(10, 270, 200, 30);</span>
+<span class="nc" id="L170">                btnNewButton_4.setBackground(Color.BLACK);</span>
+<span class="nc" id="L171">                btnNewButton_4.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L173">		contentPane.add(btnNewButton_4);</span>
+		
+<span class="nc" id="L175">		JButton btnNewButton_5 = new JButton(&quot;Update Check Status&quot;);</span>
+<span class="nc" id="L176">		btnNewButton_5.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try{
+<span class="nc" id="L179">				UpdateCheck update = new UpdateCheck();</span>
+<span class="nc" id="L180">				update.setVisible(true);</span>
+<span class="nc" id="L181">                                setVisible(false);</span>
+				}
+<span class="nc" id="L183">				catch(Exception e1){</span>
+<span class="nc" id="L184">					e1.printStackTrace();</span>
+<span class="nc" id="L185">				}</span>
+<span class="nc" id="L186">			}</span>
+		});
+<span class="nc" id="L188">		btnNewButton_5.setBounds(10, 310, 200, 30);</span>
+<span class="nc" id="L189">                btnNewButton_5.setBackground(Color.BLACK);</span>
+<span class="nc" id="L190">                btnNewButton_5.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L192">		contentPane.add(btnNewButton_5);</span>
+		
+<span class="nc" id="L194">		JButton btnNewButton_6 = new JButton(&quot;Update Room Status&quot;);</span>
+<span class="nc" id="L195">		btnNewButton_6.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try{
+<span class="nc" id="L198">					UpdateRoom room = new UpdateRoom();</span>
+<span class="nc" id="L199">					room.setVisible(true);</span>
+<span class="nc" id="L200">                                        setVisible(false);</span>
+<span class="nc" id="L201">				}catch(Exception s)</span>
+				{
+<span class="nc" id="L203">					s.printStackTrace();</span>
+<span class="nc" id="L204">				}</span>
+<span class="nc" id="L205">			}</span>
+		});
+<span class="nc" id="L207">		btnNewButton_6.setBounds(10, 350, 200, 30);</span>
+<span class="nc" id="L208">                btnNewButton_6.setBackground(Color.BLACK);</span>
+<span class="nc" id="L209">                btnNewButton_6.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L211">		contentPane.add(btnNewButton_6);</span>
+		
+<span class="nc" id="L213">		JButton btnPickUpSerice = new JButton(&quot;Pick up Service&quot;);</span>
+<span class="nc" id="L214">		btnPickUpSerice.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+<span class="nc" id="L217">				PickUp pick = new PickUp();</span>
+<span class="nc" id="L218">				pick.setVisible(true);</span>
+<span class="nc" id="L219">                                setVisible(false);</span>
+				}
+<span class="nc" id="L221">				catch(Exception e){</span>
+<span class="nc" id="L222">					e.printStackTrace();</span>
+<span class="nc" id="L223">				}</span>
+<span class="nc" id="L224">			}</span>
+		});
+<span class="nc" id="L226">		btnPickUpSerice.setBounds(10, 390, 200, 30);</span>
+<span class="nc" id="L227">                btnPickUpSerice.setBackground(Color.BLACK);</span>
+<span class="nc" id="L228">                btnPickUpSerice.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L230">		contentPane.add(btnPickUpSerice);</span>
+		
+<span class="nc" id="L232">		JButton btnSearchRoom = new JButton(&quot;Search Room&quot;);</span>
+<span class="nc" id="L233">		btnSearchRoom.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try {
+<span class="nc" id="L236">				SearchRoom search = new SearchRoom();</span>
+<span class="nc" id="L237">				search.setVisible(true);</span>
+<span class="nc" id="L238">                                setVisible(false);</span>
+				}
+<span class="nc" id="L240">				catch (Exception ss){</span>
+<span class="nc" id="L241">					ss.printStackTrace();</span>
+<span class="nc" id="L242">				}</span>
+<span class="nc" id="L243">			}</span>
+		});
+<span class="nc" id="L245">		btnSearchRoom.setBounds(10, 430, 200, 30);</span>
+<span class="nc" id="L246">                btnSearchRoom.setBackground(Color.BLACK);</span>
+<span class="nc" id="L247">                btnSearchRoom.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L249">		contentPane.add(btnSearchRoom);</span>
+
+<span class="nc" id="L251">		JButton btnNewButton_7 = new JButton(&quot;Log Out&quot;);</span>
+<span class="nc" id="L252">		btnNewButton_7.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent ae) {
+				try {
+<span class="nc" id="L255">                                    new Login().setVisible(true);</span>
+<span class="nc" id="L256">                                    setVisible(false);</span>
+                                    
+<span class="nc" id="L258">				} catch (Exception e) {</span>
+<span class="nc" id="L259">					e.printStackTrace();</span>
+<span class="nc" id="L260">				}</span>
+				
+<span class="nc" id="L262">			}</span>
+		});
+<span class="nc" id="L264">		btnNewButton_7.setBounds(10, 470, 200, 30);</span>
+<span class="nc" id="L265">                btnNewButton_7.setBackground(Color.BLACK);</span>
+<span class="nc" id="L266">                btnNewButton_7.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L268">		contentPane.add(btnNewButton_7);</span>
+<span class="nc" id="L269">                getContentPane().setBackground(Color.WHITE);</span>
+                
+<span class="nc" id="L271">                setVisible(true);</span>
+<span class="nc" id="L272">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

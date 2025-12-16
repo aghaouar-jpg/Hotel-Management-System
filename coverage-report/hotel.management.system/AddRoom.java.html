@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddRoom.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">AddRoom.java</span></div><h1>AddRoom.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.*;
+
+public class AddRoom extends JFrame implements ActionListener{
+
+    private JPanel contentPane;
+    private JTextField t1,t2,t3,t4;
+    private JComboBox comboBox, comboBox_1, comboBox_2, comboBox_3;
+    JButton b1,b2;
+    Choice c1;
+
+    public static void main(String[] args) {
+<span class="nc" id="L25">        new AddRoom().setVisible(true);</span>
+<span class="nc" id="L26">    }</span>
+
+
+<span class="nc" id="L29">    public AddRoom() {</span>
+<span class="nc" id="L30">        setBounds(450, 200, 1000, 450);</span>
+<span class="nc" id="L31">	contentPane = new JPanel();</span>
+<span class="nc" id="L32">	setContentPane(contentPane);</span>
+<span class="nc" id="L33">	contentPane.setLayout(null);</span>
+        
+<span class="nc" id="L35">        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/twelve.jpg&quot;));</span>
+<span class="nc" id="L36">                Image i3 = i1.getImage().getScaledInstance(500, 300,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L37">                ImageIcon i2 = new ImageIcon(i3);</span>
+<span class="nc" id="L38">                JLabel l15 = new JLabel(i2);</span>
+<span class="nc" id="L39">                l15.setBounds(400,30,500,370);</span>
+<span class="nc" id="L40">                add(l15);</span>
+        
+<span class="nc" id="L42">        JLabel l10 = new JLabel(&quot;Add Rooms&quot;);</span>
+<span class="nc" id="L43">        l10.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 18));</span>
+<span class="nc" id="L44">	l10.setBounds(194, 10, 120, 22);</span>
+<span class="nc" id="L45">	contentPane.add(l10);</span>
+        
+	
+        
+<span class="nc" id="L49">	JLabel l1 = new JLabel(&quot;Room Number&quot;);</span>
+<span class="nc" id="L50">	l1.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L51">	l1.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L52">	l1.setBounds(64, 70, 102, 22);</span>
+<span class="nc" id="L53">	contentPane.add(l1);</span>
+        
+        
+<span class="nc" id="L56">        t4 = new JTextField();</span>
+<span class="nc" id="L57">	t4.setBounds(174, 70, 156, 20);</span>
+<span class="nc" id="L58">	contentPane.add(t4);</span>
+        
+
+<span class="nc" id="L61">	JLabel l2 = new JLabel(&quot;Availability&quot;);</span>
+<span class="nc" id="L62">	l2.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L63">	l2.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L64">	l2.setBounds(64, 110, 102, 22);</span>
+<span class="nc" id="L65">	contentPane.add(l2);</span>
+        
+<span class="nc" id="L67">        comboBox = new JComboBox(new String[] { &quot;Available&quot;, &quot;Occupied&quot; });</span>
+<span class="nc" id="L68">	comboBox.setBounds(176, 110, 154, 20);</span>
+<span class="nc" id="L69">	contentPane.add(comboBox);</span>
+
+
+<span class="nc" id="L72">	JLabel l3 = new JLabel(&quot;Cleaning Status&quot;);</span>
+<span class="nc" id="L73">	l3.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L74">	l3.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L75">	l3.setBounds(64, 150, 102, 22);</span>
+<span class="nc" id="L76">	contentPane.add(l3);</span>
+        
+<span class="nc" id="L78">        comboBox_2 = new JComboBox(new String[] { &quot;Cleaned&quot;, &quot;Dirty&quot; });</span>
+<span class="nc" id="L79">	comboBox_2.setBounds(176, 150, 154, 20);</span>
+<span class="nc" id="L80">	contentPane.add(comboBox_2);</span>
+
+<span class="nc" id="L82">	JLabel l4 = new JLabel(&quot;Price&quot;);</span>
+<span class="nc" id="L83">	l4.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L84">	l4.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L85">	l4.setBounds(64, 190, 102, 22);</span>
+<span class="nc" id="L86">	contentPane.add(l4);</span>
+        
+<span class="nc" id="L88">        t2 = new JTextField();</span>
+<span class="nc" id="L89">	t2.setBounds(174, 190, 156, 20);</span>
+<span class="nc" id="L90">	contentPane.add(t2);</span>
+
+<span class="nc" id="L92">        JLabel l5 = new JLabel(&quot;Bed Type&quot;);</span>
+<span class="nc" id="L93">	l5.setForeground(new Color(25, 25, 112));</span>
+<span class="nc" id="L94">	l5.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 14));</span>
+<span class="nc" id="L95">	l5.setBounds(64, 230, 102, 22);</span>
+<span class="nc" id="L96">	contentPane.add(l5);</span>
+
+
+<span class="nc" id="L99">        comboBox_3 = new JComboBox(new String[] { &quot;Single Bed&quot;, &quot;Double Bed&quot;});</span>
+<span class="nc" id="L100">	comboBox_3.setBounds(176, 230, 154, 20);</span>
+<span class="nc" id="L101">	contentPane.add(comboBox_3);</span>
+
+	
+
+	
+
+<span class="nc" id="L107">	b1 = new JButton(&quot;Add&quot;);</span>
+<span class="nc" id="L108">	b1.addActionListener(this);</span>
+<span class="nc" id="L109">	b1.setBounds(64, 321, 111, 33);</span>
+<span class="nc" id="L110">        b1.setBackground(Color.BLACK);</span>
+<span class="nc" id="L111">        b1.setForeground(Color.WHITE);</span>
+<span class="nc" id="L112">	contentPane.add(b1);</span>
+
+<span class="nc" id="L114">	b2 = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L115">	b2.addActionListener(this);</span>
+<span class="nc" id="L116">	b2.setBounds(198, 321, 111, 33);</span>
+<span class="nc" id="L117">        b2.setBackground(Color.BLACK);</span>
+<span class="nc" id="L118">        b2.setForeground(Color.WHITE);</span>
+<span class="nc" id="L119">	contentPane.add(b2);</span>
+
+	
+<span class="nc" id="L122">        contentPane.setBackground(Color.WHITE);</span>
+    
+<span class="nc" id="L124">    }</span>
+    
+    public void actionPerformed(ActionEvent ae){
+        try{
+            
+<span class="nc bnc" id="L129" title="All 2 branches missed.">            if(ae.getSource() == b1){</span>
+                try{
+<span class="nc" id="L131">                conn c = new conn();</span>
+<span class="nc" id="L132">                String room = t4.getText();</span>
+<span class="nc" id="L133">                String available = (String)comboBox.getSelectedItem();</span>
+<span class="nc" id="L134">                String status = (String)comboBox_2.getSelectedItem();</span>
+<span class="nc" id="L135">                String price  = t2.getText();</span>
+<span class="nc" id="L136">                String type = (String)comboBox_3.getSelectedItem();</span>
+<span class="nc" id="L137">                String str = &quot;INSERT INTO room values( '&quot;+room+&quot;', '&quot;+available+&quot;', '&quot;+status+&quot;','&quot;+price+&quot;', '&quot;+type+&quot;')&quot;;</span>
+              
+                
+<span class="nc" id="L140">		c.s.executeUpdate(str);</span>
+<span class="nc" id="L141">		JOptionPane.showMessageDialog(null, &quot;Room Successfully Added&quot;);</span>
+<span class="nc" id="L142">                this.setVisible(false);</span>
+               
+<span class="nc" id="L144">                }catch(Exception ee){</span>
+<span class="nc" id="L145">                    System.out.println(ee);</span>
+<span class="nc" id="L146">                }</span>
+            }
+<span class="nc bnc" id="L148" title="All 2 branches missed.">            else if(ae.getSource() == b2){</span>
+<span class="nc" id="L149">                this.setVisible(false);</span>
+            }
+<span class="nc" id="L151">        }catch(Exception eee){</span>
+            
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

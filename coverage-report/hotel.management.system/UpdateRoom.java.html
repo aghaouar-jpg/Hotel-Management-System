@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UpdateRoom.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">UpdateRoom.java</span></div><h1>UpdateRoom.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+import java.awt.BorderLayout;
+import java.awt.*;
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class UpdateRoom extends JFrame {
+<span class="nc" id="L20">Connection conn = null;</span>
+<span class="nc" id="L21">PreparedStatement pst = null;</span>
+	private JPanel contentPane;
+	private JTextField txt_ID;
+	private JTextField txt_Ava;
+	private JTextField txt_Status;
+	private JTextField txt_Room;
+        
+        Choice c1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L34">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L37">					UpdateRoom frame = new UpdateRoom();</span>
+<span class="nc" id="L38">					frame.setVisible(true);</span>
+<span class="nc" id="L39">				} catch (Exception e) {</span>
+<span class="nc" id="L40">					e.printStackTrace();</span>
+<span class="nc" id="L41">				}</span>
+<span class="nc" id="L42">			}</span>
+		});
+<span class="nc" id="L44">	}</span>
+	public void close(){
+<span class="nc" id="L46">		this.dispose();</span>
+<span class="nc" id="L47">	}</span>
+
+	/**
+	 * Create the frame.
+	 * @throws SQLException 
+	 */
+<span class="nc" id="L53">	public UpdateRoom() throws SQLException {</span>
+		//conn = Javaconnect.getDBConnection();
+<span class="nc" id="L55">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L56">		setBounds(530, 200, 1000, 450);</span>
+<span class="nc" id="L57">		contentPane = new JPanel();</span>
+<span class="nc" id="L58">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L59">		setContentPane(contentPane);</span>
+<span class="nc" id="L60">		contentPane.setLayout(null);</span>
+                
+<span class="nc" id="L62">                ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/seventh.jpg&quot;));</span>
+<span class="nc" id="L63">                Image i3 = i1.getImage().getScaledInstance(550, 250,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L64">                ImageIcon i2 = new ImageIcon(i3);</span>
+<span class="nc" id="L65">                JLabel l1 = new JLabel(i2);</span>
+<span class="nc" id="L66">                l1.setBounds(400,80,600,250);</span>
+<span class="nc" id="L67">                add(l1);</span>
+		
+<span class="nc" id="L69">		JLabel lblUpdateRoomStatus = new JLabel(&quot;Update Room Status&quot;);</span>
+<span class="nc" id="L70">		lblUpdateRoomStatus.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 20));</span>
+<span class="nc" id="L71">		lblUpdateRoomStatus.setBounds(85, 11, 206, 34);</span>
+<span class="nc" id="L72">		contentPane.add(lblUpdateRoomStatus);</span>
+		
+<span class="nc" id="L74">		JLabel lblNewLabel = new JLabel(&quot;Guest ID:&quot;);</span>
+<span class="nc" id="L75">		lblNewLabel.setBounds(27, 87, 90, 14);</span>
+<span class="nc" id="L76">		contentPane.add(lblNewLabel);</span>
+                
+<span class="nc" id="L78">                c1 = new Choice();</span>
+                try{
+<span class="nc" id="L80">                    conn c = new conn();</span>
+<span class="nc" id="L81">                    ResultSet rs = c.s.executeQuery(&quot;select * from customer&quot;);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L83">                        c1.add(rs.getString(&quot;number&quot;));    </span>
+                    }
+<span class="nc" id="L85">                }catch(Exception e){ }</span>
+<span class="nc" id="L86">                c1.setBounds(160, 84, 140, 20);</span>
+<span class="nc" id="L87">		contentPane.add(c1);</span>
+		
+<span class="nc" id="L89">		JLabel lblAvailability = new JLabel(&quot;Availability:&quot;);</span>
+<span class="nc" id="L90">		lblAvailability.setBounds(27, 187, 90, 14);</span>
+<span class="nc" id="L91">		contentPane.add(lblAvailability);</span>
+		
+<span class="nc" id="L93">		JLabel lblCleanStatus = new JLabel(&quot;Clean Status:&quot;);</span>
+<span class="nc" id="L94">		lblCleanStatus.setBounds(27, 240, 90, 14);</span>
+<span class="nc" id="L95">		contentPane.add(lblCleanStatus);</span>
+		
+		
+<span class="nc" id="L98">		txt_Ava = new JTextField();</span>
+<span class="nc" id="L99">		txt_Ava.setBounds(160, 184, 140, 20);</span>
+<span class="nc" id="L100">		contentPane.add(txt_Ava);</span>
+<span class="nc" id="L101">		txt_Ava.setColumns(10);</span>
+		
+<span class="nc" id="L103">		txt_Status = new JTextField();</span>
+<span class="nc" id="L104">		txt_Status.setBounds(160, 237, 140, 20);</span>
+<span class="nc" id="L105">		contentPane.add(txt_Status);</span>
+<span class="nc" id="L106">		txt_Status.setColumns(10);</span>
+                
+<span class="nc" id="L108">                txt_Room = new JTextField();</span>
+<span class="nc" id="L109">		txt_Room.setBounds(160, 130, 140, 20);</span>
+<span class="nc" id="L110">		contentPane.add(txt_Room);</span>
+<span class="nc" id="L111">		txt_Room.setColumns(10);</span>
+                
+<span class="nc" id="L113">                JButton b1 = new JButton(&quot;Check&quot;);</span>
+<span class="nc" id="L114">		b1.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+                            try{
+<span class="nc" id="L117">                                String s1 = c1.getSelectedItem();</span>
+<span class="nc" id="L118">				conn c = new conn();</span>
+<span class="nc" id="L119">                                ResultSet rs1 = c.s.executeQuery(&quot;select * from customer where number = &quot;+s1);</span>
+                                
+<span class="nc bnc" id="L121" title="All 2 branches missed.">                                while(rs1.next()){</span>
+<span class="nc" id="L122">                                    txt_Room.setText(rs1.getString(&quot;room_number&quot;));    </span>
+                                }
+<span class="nc" id="L124">                            }catch(Exception ee){}</span>
+                            try{
+<span class="nc" id="L126">                                conn c  = new conn();</span>
+<span class="nc" id="L127">                                ResultSet rs2 = c.s.executeQuery(&quot;select * from room where room_number = &quot;+txt_Room.getText());</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">                                while(rs2.next()){</span>
+<span class="nc" id="L129">                                    txt_Ava.setText(rs2.getString(&quot;availability&quot;)); </span>
+<span class="nc" id="L130">                                    txt_Status.setText(rs2.getString(&quot;clean_status&quot;));</span>
+                                }
+<span class="nc" id="L132">                            }catch(Exception ee){}</span>
+<span class="nc" id="L133">                        }</span>
+		});
+<span class="nc" id="L135">		b1.setBounds(120, 315, 89, 23);</span>
+<span class="nc" id="L136">                b1.setBackground(Color.BLACK);</span>
+<span class="nc" id="L137">                b1.setForeground(Color.WHITE);</span>
+<span class="nc" id="L138">		contentPane.add(b1);</span>
+		
+<span class="nc" id="L140">		JButton btnUpdate = new JButton(&quot;Update&quot;);</span>
+<span class="nc" id="L141">		btnUpdate.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) throws NumberFormatException {
+				
+				try{
+<span class="nc" id="L145">                                    conn c = new conn();</span>
+<span class="nc" id="L146">                                    String str = &quot;update room set clean_status = '&quot;+txt_Status.getText()+&quot;' where room_number = &quot;+txt_Room.getText();</span>
+<span class="nc" id="L147">                                    c.s.executeUpdate(str);</span>
+<span class="nc" id="L148">                                    JOptionPane.showMessageDialog(null, &quot;Update Sucessful&quot;);</span>
+                                    
+<span class="nc" id="L150">                                    new Reception().setVisible(true);</span>
+<span class="nc" id="L151">                                    setVisible(false);</span>
+<span class="nc" id="L152">				}catch (Exception ee){</span>
+<span class="nc" id="L153">					ee.printStackTrace();</span>
+<span class="nc" id="L154">				}</span>
+				
+			
+<span class="nc" id="L157">			}</span>
+		});
+<span class="nc" id="L159">		btnUpdate.setBounds(60, 355, 89, 23);</span>
+<span class="nc" id="L160">                btnUpdate.setBackground(Color.BLACK);</span>
+<span class="nc" id="L161">                btnUpdate.setForeground(Color.WHITE);</span>
+<span class="nc" id="L162">		contentPane.add(btnUpdate);</span>
+		
+<span class="nc" id="L164">		JButton btnExit = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L165">		btnExit.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L167">				new Reception().setVisible(true);</span>
+<span class="nc" id="L168">                                setVisible(false);</span>
+<span class="nc" id="L169">			}</span>
+		});
+<span class="nc" id="L171">		btnExit.setBounds(180, 355, 89, 23);</span>
+<span class="nc" id="L172">                btnExit.setBackground(Color.BLACK);</span>
+<span class="nc" id="L173">                btnExit.setForeground(Color.WHITE);</span>
+<span class="nc" id="L174">		contentPane.add(btnExit);</span>
+		
+<span class="nc" id="L176">		JLabel lblRoomId = new JLabel(&quot;Room Number:&quot;);</span>
+<span class="nc" id="L177">		lblRoomId.setBounds(27, 133, 100, 14);</span>
+<span class="nc" id="L178">		contentPane.add(lblRoomId);</span>
+		
+<span class="nc" id="L180">		getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L181">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CheckOut.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">CheckOut.java</span></div><h1>CheckOut.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hotel.management.system;
+
+import java.awt.BorderLayout;
+import java.awt.*;
+import java.awt.EventQueue;
+
+
+import java.sql.*;	
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Font;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+
+public class CheckOut extends JFrame{
+<span class="nc" id="L22">	Connection conn = null;</span>
+<span class="nc" id="L23">	PreparedStatement pst = null;</span>
+	private JPanel contentPane;
+	private JTextField t1;
+        Choice c1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L32">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L35">					CheckOut frame = new CheckOut();</span>
+<span class="nc" id="L36">					frame.setVisible(true);</span>
+<span class="nc" id="L37">				} catch (Exception e) {</span>
+<span class="nc" id="L38">					e.printStackTrace();</span>
+<span class="nc" id="L39">				}</span>
+<span class="nc" id="L40">			}</span>
+		});
+<span class="nc" id="L42">	}</span>
+	public void close(){
+<span class="nc" id="L44">		this.dispose();</span>
+<span class="nc" id="L45">	}</span>
+
+	/**
+	 * Create the frame.
+	 * @throws SQLException 
+	 */
+<span class="nc" id="L51">	public CheckOut() throws SQLException {</span>
+		//conn = Javaconnect.getDBConnection();
+<span class="nc" id="L53">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L54">		setBounds(530, 200, 800, 294);</span>
+<span class="nc" id="L55">		contentPane = new JPanel();</span>
+<span class="nc" id="L56">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L57">		setContentPane(contentPane);</span>
+<span class="nc" id="L58">		contentPane.setLayout(null);</span>
+                
+<span class="nc" id="L60">                ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/sixth.jpg&quot;));</span>
+<span class="nc" id="L61">                Image i3 = i1.getImage().getScaledInstance(400, 225,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L62">                ImageIcon i2 = new ImageIcon(i3);</span>
+<span class="nc" id="L63">                JLabel l1 = new JLabel(i2);</span>
+<span class="nc" id="L64">                l1.setBounds(300,0,500,225);</span>
+<span class="nc" id="L65">                add(l1);</span>
+		
+<span class="nc" id="L67">		JLabel lblCheckOut = new JLabel(&quot;Check Out &quot;);</span>
+<span class="nc" id="L68">		lblCheckOut.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 20));</span>
+<span class="nc" id="L69">		lblCheckOut.setBounds(70, 11, 140, 35);</span>
+<span class="nc" id="L70">		contentPane.add(lblCheckOut);</span>
+		
+<span class="nc" id="L72">		JLabel lblName = new JLabel(&quot;Number :&quot;);</span>
+<span class="nc" id="L73">		lblName.setBounds(20, 85, 80, 14);</span>
+<span class="nc" id="L74">		contentPane.add(lblName);</span>
+                
+<span class="nc" id="L76">                c1 = new Choice();</span>
+                try{
+<span class="nc" id="L78">                    conn c = new conn();</span>
+<span class="nc" id="L79">                    ResultSet rs = c.s.executeQuery(&quot;select * from customer&quot;);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                    while(rs.next()){</span>
+<span class="nc" id="L81">                        c1.add(rs.getString(&quot;number&quot;));    </span>
+                    }
+<span class="nc" id="L83">                }catch(Exception e){ }</span>
+<span class="nc" id="L84">                c1.setBounds(130, 82, 150, 20);</span>
+<span class="nc" id="L85">		contentPane.add(c1);</span>
+                
+<span class="nc" id="L87">                ImageIcon i4 = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/tick.png&quot;));</span>
+<span class="nc" id="L88">                Image i5 = i4.getImage().getScaledInstance(20, 20,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L89">                ImageIcon i6 = new ImageIcon(i5);</span>
+<span class="nc" id="L90">                JButton l2 = new JButton(i6);</span>
+<span class="nc" id="L91">                l2.setBounds(290,82,20,20);</span>
+<span class="nc" id="L92">                add(l2);</span>
+                
+<span class="nc" id="L94">                l2.addActionListener(new ActionListener(){</span>
+                    
+                    public void actionPerformed(ActionEvent ae){
+<span class="nc" id="L97">                        System.out.println(&quot;Hi&quot;);</span>
+                        try{
+                            
+<span class="nc" id="L100">                            conn c = new conn();</span>
+<span class="nc" id="L101">                            String number = c1.getSelectedItem();</span>
+<span class="nc" id="L102">                            ResultSet rs = c.s.executeQuery(&quot;select * from customer where number = &quot;+number);</span>
+                            
+<span class="nc bnc" id="L104" title="All 2 branches missed.">                            if(rs.next()){</span>
+<span class="nc" id="L105">                                System.out.println(&quot;clicked&quot;);</span>
+<span class="nc" id="L106">                                t1.setText(rs.getString(&quot;room_number&quot;));    </span>
+                            }
+<span class="nc" id="L108">                        }catch(Exception e){ }</span>
+<span class="nc" id="L109">                    }</span>
+                });
+
+		
+<span class="nc" id="L113">		JLabel lblRoomNumber = new JLabel(&quot;Room Number:&quot;);</span>
+<span class="nc" id="L114">		lblRoomNumber.setBounds(20, 132, 86, 20);</span>
+<span class="nc" id="L115">		contentPane.add(lblRoomNumber);</span>
+		
+<span class="nc" id="L117">		t1 = new JTextField();</span>
+<span class="nc" id="L118">                t1.setBounds(130, 132, 150, 20);</span>
+<span class="nc" id="L119">		contentPane.add(t1);</span>
+                
+                
+                
+                
+                
+		
+                
+<span class="nc" id="L127">		JButton btnCheckOut = new JButton(&quot;Check Out&quot;);</span>
+<span class="nc" id="L128">		btnCheckOut.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L130">                                String id = c1.getSelectedItem();</span>
+<span class="nc" id="L131">                                String s1 = t1.getText();</span>
+<span class="nc" id="L132">				String deleteSQL = &quot;Delete from customer where number = &quot;+id;</span>
+<span class="nc" id="L133">                                String q2 = &quot;update room set availability = 'Available' where room_number = &quot;+s1;</span>
+                                
+                                
+<span class="nc" id="L136">				conn c = new conn();</span>
+
+	    		try{
+	    			
+	    			
+<span class="nc" id="L141">	    			c.s.executeUpdate(deleteSQL);</span>
+<span class="nc" id="L142">	    			c.s.executeUpdate(q2);</span>
+<span class="nc" id="L143">	    			JOptionPane.showMessageDialog(null, &quot;Check Out Successful&quot;);</span>
+<span class="nc" id="L144">	    			new Reception().setVisible(true);</span>
+<span class="nc" id="L145">                                setVisible(false);</span>
+<span class="nc" id="L146">	    		}catch(SQLException e1){</span>
+<span class="nc" id="L147">	    			System.out.println(e1.getMessage());</span>
+<span class="nc" id="L148">	    		}</span>
+<span class="nc" id="L149">			}</span>
+		});
+<span class="nc" id="L151">		btnCheckOut.setBounds(50, 200, 100, 25);</span>
+<span class="nc" id="L152">                btnCheckOut.setBackground(Color.BLACK);</span>
+<span class="nc" id="L153">                btnCheckOut.setForeground(Color.WHITE);</span>
+<span class="nc" id="L154">		contentPane.add(btnCheckOut);</span>
+		
+<span class="nc" id="L156">		JButton btnExit = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L157">		btnExit.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L159">				new Reception().setVisible(true);</span>
+<span class="nc" id="L160">                                setVisible(false);</span>
+<span class="nc" id="L161">			}</span>
+		});
+<span class="nc" id="L163">		btnExit.setBounds(160, 200, 100, 25);</span>
+<span class="nc" id="L164">                btnExit.setBackground(Color.BLACK);</span>
+<span class="nc" id="L165">                btnExit.setForeground(Color.WHITE);</span>
+<span class="nc" id="L166">		contentPane.add(btnExit);</span>
+                
+                
+<span class="nc" id="L169">                getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L170">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

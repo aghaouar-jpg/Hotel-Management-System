@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddEmployee.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">hotel.management.system</a> &gt; <span class="el_source">AddEmployee.java</span></div><h1>AddEmployee.java</h1><pre class="source lang-java linenums">package hotel.management.system;
+
+
+import java.awt.EventQueue;
+
+
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+import javax.swing.*;
+
+public class AddEmployee extends JFrame{ //Third Frame
+
+    
+	JTextField textField,textField_1,textField_2,textField_3,textField_4,textField_5,textField_6;
+        JComboBox c1;
+
+<span class="nc" id="L18">        public AddEmployee(){</span>
+<span class="nc" id="L19">            getContentPane().setForeground(Color.BLUE);</span>
+<span class="nc" id="L20">            getContentPane().setBackground(Color.WHITE);</span>
+<span class="nc" id="L21">            setTitle(&quot;ADD EMPLOYEE DETAILS&quot;);</span>
+		 
+<span class="nc" id="L23">            setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);</span>
+<span class="nc" id="L24">            setSize(778,486);</span>
+<span class="nc" id="L25">            getContentPane().setLayout(null);</span>
+			
+<span class="nc" id="L27">            JLabel Passportno = new JLabel(&quot;NAME&quot;);</span>
+<span class="nc" id="L28">            Passportno.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 17));</span>
+<span class="nc" id="L29">            Passportno.setBounds(60, 30, 150, 27);</span>
+<span class="nc" id="L30">            add(Passportno);</span>
+            
+<span class="nc" id="L32">            textField = new JTextField();</span>
+<span class="nc" id="L33">            textField.setBounds(200, 30, 150, 27);</span>
+<span class="nc" id="L34">            add(textField);</span>
+			
+<span class="nc" id="L36">            JButton Next = new JButton(&quot;SAVE&quot;);</span>
+<span class="nc" id="L37">            Next.setBounds(200, 420, 150, 30);</span>
+<span class="nc" id="L38">            Next.setBackground(Color.BLACK);</span>
+<span class="nc" id="L39">            Next.setForeground(Color.WHITE);</span>
+<span class="nc" id="L40">            add(Next);</span>
+			
+<span class="nc" id="L42">            JLabel Pnrno = new JLabel(&quot;AGE&quot;);</span>
+<span class="nc" id="L43">            Pnrno.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 17));</span>
+<span class="nc" id="L44">            Pnrno.setBounds(60, 80, 150, 27);</span>
+<span class="nc" id="L45">            add(Pnrno);</span>
+			
+<span class="nc" id="L47">            textField_1 = new JTextField();</span>
+<span class="nc" id="L48">            textField_1.setBounds(200, 80, 150, 27);</span>
+<span class="nc" id="L49">            add(textField_1);</span>
+            
+<span class="nc" id="L51">            JLabel Gender = new JLabel(&quot;GENDER&quot;);</span>
+<span class="nc" id="L52">            Gender.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 17));</span>
+<span class="nc" id="L53">            Gender.setBounds(60, 120, 150, 27);</span>
+<span class="nc" id="L54">            add(Gender);</span>
+		
+<span class="nc" id="L56">            JRadioButton NewRadioButton = new JRadioButton(&quot;MALE&quot;);</span>
+<span class="nc" id="L57">            NewRadioButton.setBackground(Color.WHITE);</span>
+<span class="nc" id="L58">            NewRadioButton.setBounds(200, 120, 70, 27);</span>
+<span class="nc" id="L59">            add(NewRadioButton);</span>
+	
+<span class="nc" id="L61">            JRadioButton Female = new JRadioButton(&quot;FEMALE&quot;);</span>
+<span class="nc" id="L62">            Female.setBackground(Color.WHITE);</span>
+<span class="nc" id="L63">            Female.setBounds(280, 120, 70, 27);</span>
+<span class="nc" id="L64">            add(Female);</span>
+            
+            
+<span class="nc" id="L67">            JLabel Address = new JLabel(&quot;JOB&quot;);</span>
+<span class="nc" id="L68">            Address.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 17));</span>
+<span class="nc" id="L69">            Address.setBounds(60, 170, 150, 27);</span>
+<span class="nc" id="L70">            add(Address);</span>
+			
+<span class="nc" id="L72">            String course[] = {&quot;Front Desk Clerks&quot;,&quot;Porters&quot;,&quot;Housekeeping&quot;,&quot;Kitchen Staff&quot;,&quot;Room Service&quot;,&quot;Waiter/Waitress&quot;,&quot;Manager&quot;,&quot;Accountant&quot;,&quot;Chef&quot;};</span>
+<span class="nc" id="L73">            c1 = new JComboBox(course);</span>
+<span class="nc" id="L74">            c1.setBackground(Color.WHITE);</span>
+<span class="nc" id="L75">            c1.setBounds(200,170,150,30);</span>
+<span class="nc" id="L76">            add(c1);</span>
+            		
+<span class="nc" id="L78">            JLabel Nationality = new JLabel(&quot;SALARY&quot;);</span>
+<span class="nc" id="L79">            Nationality.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 17));</span>
+<span class="nc" id="L80">            Nationality.setBounds(60, 220, 150, 27);</span>
+<span class="nc" id="L81">            add(Nationality);</span>
+			
+<span class="nc" id="L83">            textField_3 = new JTextField();</span>
+<span class="nc" id="L84">            textField_3.setBounds(200, 220, 150, 27);</span>
+<span class="nc" id="L85">            add(textField_3);</span>
+	
+<span class="nc" id="L87">            JLabel Name = new JLabel(&quot;PHONE&quot;);</span>
+<span class="nc" id="L88">            Name.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 17));</span>
+<span class="nc" id="L89">            Name.setBounds(60, 270, 150, 27);</span>
+<span class="nc" id="L90">            add(Name);</span>
+	
+<span class="nc" id="L92">            textField_4 = new JTextField();</span>
+<span class="nc" id="L93">            textField_4.setBounds(200, 270, 150, 27);</span>
+<span class="nc" id="L94">            add(textField_4);</span>
+	
+<span class="nc" id="L96">            JLabel Phno = new JLabel(&quot;AADHAR&quot;);</span>
+<span class="nc" id="L97">            Phno.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 17));</span>
+<span class="nc" id="L98">            Phno.setBounds(60, 320, 150, 27);</span>
+<span class="nc" id="L99">            add(Phno);</span>
+			
+<span class="nc" id="L101">            textField_5 = new JTextField();</span>
+<span class="nc" id="L102">            textField_5.setBounds(200, 320, 150, 27);</span>
+<span class="nc" id="L103">            add(textField_5);</span>
+	
+            
+<span class="nc" id="L106">            JLabel email = new JLabel(&quot;EMAIL&quot;);</span>
+<span class="nc" id="L107">            email.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 17));</span>
+<span class="nc" id="L108">            email.setBounds(60, 370, 150, 27);</span>
+<span class="nc" id="L109">            add(email);</span>
+			
+<span class="nc" id="L111">            textField_6 = new JTextField();</span>
+<span class="nc" id="L112">            textField_6.setBounds(200, 370, 150, 27);</span>
+<span class="nc" id="L113">            add(textField_6);</span>
+	
+<span class="nc" id="L115">            setVisible(true);</span>
+	
+<span class="nc" id="L117">            JLabel AddPassengers = new JLabel(&quot;ADD EMPLOYEE DETAILS&quot;);</span>
+<span class="nc" id="L118">            AddPassengers.setForeground(Color.BLUE);</span>
+<span class="nc" id="L119">            AddPassengers.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 31));</span>
+<span class="nc" id="L120">            AddPassengers.setBounds(450, 24, 442, 35);</span>
+<span class="nc" id="L121">            add(AddPassengers);</span>
+			
+     
+<span class="nc" id="L124">            ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource(&quot;hotel/management/system/icons/tenth.jpg&quot;));</span>
+<span class="nc" id="L125">            Image i3 = i1.getImage().getScaledInstance(500, 500,Image.SCALE_DEFAULT);</span>
+<span class="nc" id="L126">            ImageIcon i2 = new ImageIcon(i3);</span>
+<span class="nc" id="L127">            JLabel image = new JLabel(i2);</span>
+<span class="nc" id="L128">            image.setBounds(410,80,480,410);</span>
+<span class="nc" id="L129">            add(image);</span>
+
+            
+<span class="nc" id="L132">            Next.addActionListener(new ActionListener(){</span>
+                public void actionPerformed(ActionEvent ae){
+<span class="nc" id="L134">                    String name = textField.getText();</span>
+<span class="nc" id="L135">                    String age = textField_1.getText();</span>
+<span class="nc" id="L136">                    String salary = textField_3.getText();</span>
+<span class="nc" id="L137">                    String phone = textField_4.getText();</span>
+<span class="nc" id="L138">                    String aadhar = textField_5.getText();</span>
+<span class="nc" id="L139">                    String email = textField_6.getText();</span>
+                   
+<span class="nc" id="L141">                    String gender = null;</span>
+                    
+<span class="nc bnc" id="L143" title="All 2 branches missed.">                    if(NewRadioButton.isSelected()){</span>
+<span class="nc" id="L144">                        gender = &quot;male&quot;;</span>
+                    
+<span class="nc bnc" id="L146" title="All 2 branches missed.">                    }else if(Female.isSelected()){</span>
+<span class="nc" id="L147">                        gender = &quot;female&quot;;</span>
+                    }
+
+                            
+<span class="nc" id="L151">                    String s6 = (String)c1.getSelectedItem();</span>
+                    
+                    try {
+<span class="nc" id="L154">                        conn c = new conn();</span>
+<span class="nc" id="L155">                        String str = &quot;INSERT INTO employee values( '&quot;+name+&quot;', '&quot;+age+&quot;', '&quot;+gender+&quot;','&quot;+s6+&quot;', '&quot;+salary+&quot;', '&quot;+phone+&quot;','&quot;+aadhar+&quot;', '&quot;+email+&quot;')&quot;;</span>
+                        
+<span class="nc" id="L157">                        c.s.executeUpdate(str);</span>
+<span class="nc" id="L158">                        JOptionPane.showMessageDialog(null,&quot;Employee Added&quot;);</span>
+<span class="nc" id="L159">                        setVisible(false);</span>
+                    
+<span class="nc" id="L161">                    } catch (Exception e) {</span>
+<span class="nc" id="L162">                        e.printStackTrace();</span>
+<span class="nc" id="L163">        	    }</span>
+<span class="nc" id="L164">		}</span>
+            });
+			
+<span class="nc" id="L167">            setSize(900,600);</span>
+<span class="nc" id="L168">            setVisible(true);</span>
+<span class="nc" id="L169">            setLocation(530,200);</span>
+			
+<span class="nc" id="L171">	}</span>
+        
+    public static void main(String[] args){
+<span class="nc" id="L174">        new AddEmployee();</span>
+<span class="nc" id="L175">    }   </span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

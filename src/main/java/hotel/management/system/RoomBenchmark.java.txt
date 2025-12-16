@@ -1,0 +1,15 @@
+package hotel.management.system;
+
+import org.openjdk.jmh.annotations.*;
+import java.util.concurrent.TimeUnit;
+
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@State(Scope.Thread)
+public class RoomBenchmark {
+
+    @Benchmark
+    public void benchmarkRoomCreation() {
+        Room room = new Room();
+    }
+}
